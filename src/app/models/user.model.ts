@@ -1,32 +1,34 @@
 export interface User {
-    name: string;
-    first_surname: string;
-    second_surname: string;
-    gender: string;
-    birth_date: Date;
-    nif: string;
-    street: string;
-    street_number: string;
-    door_number: string;
-    postal_code: string;
-    city: string;
-    medical_board_number: string;
-    professional_type: string;
-    nhc: string;
-    insurance_company_name: string;
-    insurance_type: string;
-    card_number: string;
-  }
-  
-  export interface Patient extends User {
-    nhc: string;
-    insurance_company_name: string;
-    insurance_type: string;
-    card_number: string;
-  }
-  
-  export interface Professional extends User {
-    medical_board_number: string;
-    professional_type: string;
-  }
-  
+  id: number;
+  userType: UserType;
+  name: string;
+  firstSurname: string;
+  secondSurname: string;
+  gender: Gender;
+  birthdate: Date;
+  nif: string;
+  address: Address;
+  medicalBoardNumber: string;
+  professionalType: ProfessionalType;
+  nhc: string;
+  insuranceCompany: InsuranceCompany
+}
+
+export type Gender = 'Male' | 'Female' | 'Other';
+export type ProfessionalType = 'Doctor' | 'Nurse' | 'Administrator';
+export type UserType = 'Patient' | 'Professional';
+export type InsuranceType = 'Health' | 'Family' | 'Dental';
+
+export interface Address {
+  street: string;
+  streetNumber: string;
+  doorNumber: string;
+  postalCode: string;
+  city: string;
+}
+
+export interface InsuranceCompany {
+  insuranceCompanyName: string;
+  insuranceType: InsuranceType;
+  cardNumber: string;
+}

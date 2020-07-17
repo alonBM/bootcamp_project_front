@@ -1,11 +1,13 @@
-<p>user-list works!</p>
-
+<h2>user-list works!</h2>
+<hr>
+<button mat-raised-button color="primary" [routerLink]="['/users','new']">Nuevo Usuario</button>
+<button mat-raised-button color="warn" (click)="onDeleteAllUsers()">Borrar Profesionales</button>
+<hr>
 <div class="example-container mat-elevation-z8">
-  <table mat-table [dataSource]="users">
-
+  <table mat-table [dataSource]="onGetUsers()">
+    <!--s usttituir por metodo que devuelve los post del servicio -->
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
@@ -24,15 +26,17 @@
       <th mat-header-cell *matHeaderCellDef> Symbol </th>
       <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
     </ng-container>
-
     <ng-container matColumnDef="icons">
       <th mat-header-cell *matHeaderCellDef> Icons </th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon [routerLink]="['/users',element.id]">assignment_ind</mat-icon>
+
+        <mat-icon [routerLink]="['/users',element.id]" >cloud</mat-icon>
+
+        <mat-icon [routerLink]="['/users',element.id]" >edit</mat-icon>
+
+        <mat-icon (click)="onDeleteUser(element.id)">delete</mat-icon>
       </td>
     </ng-container>
-
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
   </table>

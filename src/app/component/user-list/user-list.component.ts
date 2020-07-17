@@ -10,19 +10,34 @@ import { UserService } from '../../services/user.service';
 
 export class UserListComponent implements OnInit {
   displayedColumns =
-      ['name', 'position', 'weight', 'symbol','icons'];
+    ['name', 'position', 'weight', 'symbol', 'icons'];
   users: User[];
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    // this.userService.getUsers().toPromise().then((data) => {
-    //   this.users = data;
-    // }).then(console.log)
-    this.userService.getUsers().subscribe((data: User[]) => {
-      this.users = data;
-      console.log(this.users);
-    })
+    this.userService.getAllUsers()
+  }
+
+  onGetUsers() {
+    return this.userService.getUsers();
+  }
+
+  onDeleteUser(id: number) {
+    console.log(id);
+    this.userService.deleteUser(id).subscribe(console.log);
+    this.userService.getAllUsers();
+  }
+
+  onAddUser() {
+
+  }
+
+  onDeleteAllUsers() {
+    this.users = [];
+    console.log(this.users, "borre");
+    // this.userService.deleteAllUsers(this.users);
+    // console.log(this.users, "deleted all users");
   }
 
 }
