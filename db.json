@@ -1,240 +1,78 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Genghis",
-      "first_surname": "Khan",
-      "second_surname": "Castillo",
-      "gender": "Man",
-      "birth_date": "20-05-1990",
-      "nif": "XHDAMDFK",
-      "street": "Calle Alcor",
-      "street_number": "4",
-      "door_number": "B",
-      "postal_code": "837326",
-      "city": "Madrid",
-      "medical_board_number": "39239",
-      "professional_type": "Doctor",
+      "name": "Paco",
+      "firstSurname": "Pedro",
+      "secondSurname": "Martinez",
+      "gender": "Female",
+      "birthDate": "2020-07-07T22:00:00.000Z",
+      "nif": "",
+      "userType": "pacient",
+      "medicalBoardNumber": "",
+      "professionalType": "",
       "nhc": "",
-      "insurance_company_name": "",
-      "insurance_type": "",
-      "card_number": ""
+      "insuranceList": [
+        {
+          "insuranceCompanyName": "Seguro Uno",
+          "insuranceType": "Salud",
+          "cardNumber": "1"
+        },
+        {
+          "insuranceCompanyName": "Segurro Dos",
+          "insuranceType": "Dental",
+          "cardNumber": "2"
+        }
+      ],
+      "address": {
+        "street": "",
+        "streetNumber": "123",
+        "doorNumber": "hola",
+        "postalCode": "12345",
+        "city": ""
+      },
+      "id": 12
     },
     {
-      "id": 2,
-      "name": "Pepinooo",
-      "first_surname": "Khan",
-      "second_surname": "Castillo",
-      "gender": "Man",
-      "birth_date": "20-05-1990",
-      "nif": "XHDAMDFK",
-      "street": "Calle Alcor",
-      "street_number": "4",
-      "door_number": "B",
-      "postal_code": "837326",
-      "city": "Madrid",
-      "medical_board_number": "39239",
-      "professional_type": "Doctor",
+      "name": "HOla",
+      "firstSurname": "",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "",
+      "userType": "",
+      "medicalBoardNumber": "",
+      "professionalType": "",
       "nhc": "",
-      "insurance_company_name": "",
-      "insurance_type": "",
-      "card_number": ""
-    },
-    {
-      "id": 3,
-      "name": "Kal El",
-      "first_surname": "Kent",
-      "second_surname": "Olmo",
-      "gender": "Superman",
-      "birth_date": "05-02-1988",
-      "nif": "HIHKJ322",
-      "street": "Calle de las Palmas",
-      "street_number": "8",
-      "door_number": "A",
-      "postal_code": "7487673",
-      "city": "Sevilla",
-      "medical_board_number": "7487673",
-      "professional_type": "Patient",
-      "nhc": "324353433452",
-      "insurance_company_name": "Aseguradora X",
-      "insurance_type": "Salud",
-      "card_number": "47533938747"
-    },
-    {
-      "id": 5,
-      "name": "Batman",
-      "first_surname": "Wayne",
-      "second_surname": "Olmo",
-      "gender": "Man",
-      "birth_date": "05-02-1988",
-      "nif": "HIHKJ322",
-      "street": "Calle de las Palmas",
-      "street_number": "8",
-      "door_number": "A",
-      "postal_code": "7487673",
-      "city": "Sevilla",
-      "medical_board_number": "7487673",
-      "professional_type": "Patient",
-      "nhc": "324353433452",
-      "insurance_company_name": "Aseguradora X",
-      "insurance_type": "Salud",
-      "card_number": "47533938747"
-    },
-    {
-      "id": 6,
-      "name": "Ivan Drago",
-      "first_surname": "Dragonov",
-      "second_surname": "Olmo",
-      "gender": "Man",
-      "birth_date": "05-02-1988",
-      "nif": "HIHKJ322",
-      "street": "Calle de las Palmas",
-      "street_number": "8",
-      "door_number": "A",
-      "postal_code": "7487673",
-      "city": "Sevilla",
-      "medical_board_number": "7487673",
-      "professional_type": "Patient",
-      "nhc": "324353433452",
-      "insurance_company_name": "Aseguradora X",
-      "insurance_type": "Salud",
-      "card_number": "47533938747"
-    },
-    {
-      "id": 7,
-      "name": "Wladimir",
-      "first_surname": "Putin",
-      "second_surname": "Olmo",
-      "gender": "Man",
-      "birth_date": "05-02-1988",
-      "nif": "HIHKJ322",
-      "street": "Calle de las Palmas",
-      "street_number": "8",
-      "door_number": "A",
-      "postal_code": "7487673",
-      "city": "Sevilla",
-      "medical_board_number": "",
-      "professional_type": "Patient",
-      "nhc": "324353433452",
-      "insurance_company_name": "Aseguradora X",
-      "insurance_type": "Salud",
-      "card_number": "47533938747"
-    },
-    {
-      "name": "Tomas Cavataio",
-      "surname": "Pepino",
-      "gender": "Male",
-      "birthday": "05/05/2005",
-      "id": 9
-    },
-    {
-      "name": "Alonso",
-      "surname": "Bertea",
-      "gender": "Superman",
-      "birthday": "09/09/2019",
-      "id": 10
-    },
-    {
-      "id": 11,
-      "name": "asd",
-      "first_surname": "asd",
-      "second_surname": "asd",
-      "gender": "asdas"
-    },
-    {
-      "id": 12,
-      "name": "asd",
-      "first_surname": "asd",
-      "second_surname": "asd",
-      "gender": "asdas"
-    },
-    {
-      "id": 13,
-      "name": "asd",
-      "first_surname": "asd",
-      "second_surname": "asd",
-      "gender": "asdas"
-    },
-    {
-      "id": 14,
-      "name": "asd",
-      "first_surname": "asd",
-      "second_surname": "",
-      "gender": "asdas"
-    },
-    {
-      "id": 15,
-      "name": "",
-      "first_surname": "sadsad",
-      "second_surname": "asdsad",
-      "gender": "asdasd"
-    },
-    {
-      "id": 16,
-      "name": "asdasd",
-      "first_surname": "asdasd",
-      "second_surname": "asdasd",
-      "gender": "asdasd"
-    },
-    {
-      "id": 17,
-      "name": "asdasd",
-      "first_surname": "asdasdsfd",
-      "second_surname": "asdasd",
-      "gender": "asdasd"
-    },
-    {
-      "id": 18,
-      "name": "asasdasdasdsad",
-      "first_surname": "asdasdasdasd",
-      "second_surname": "asdasd",
-      "gender": "asdasd"
-    },
-    {
-      "id": 19,
-      "name": "asdfasd",
-      "first_surname": "",
-      "second_surname": "gggggg",
-      "hola": "sad",
-      "gender": "gggggg"
-    },
-    {
-      "id": 20,
-      "name": "asd",
-      "first_surname": "asdasd",
-      "second_surname": "sd",
-      "hola": "",
-      "gender": "sdasd"
-    },
-    {
-      "id": 21,
-      "name": "asdas",
-      "first_surname": "asdasd",
-      "second_surname": "holahola",
-      "hola": ""
-    },
-    {
-      "id": 22
-    },
-    {
-      "personalData": {
-        "name": "asdas",
-        "firstSurname": "sdasd"
-      },
+      "insuranceList": [],
       "address": {
-        "secondSurname": "sds",
-        "gender": "sds"
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": ""
       },
-      "id": 23
+      "id": 13
     },
     {
-      "name": "asdasd",
-      "firstSurname": "sdsds",
+      "name": "hehe",
+      "firstSurname": "",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "",
+      "userType": "",
+      "medicalBoardNumber": "",
+      "professionalType": "",
+      "nhc": "",
+      "insuranceList": [],
       "address": {
-        "secondSurname": "asds",
-        "gender": "sdsd"
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": ""
       },
-      "id": 24
+      "id": 14
     }
   ]
 }

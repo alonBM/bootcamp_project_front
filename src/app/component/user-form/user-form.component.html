@@ -2,7 +2,6 @@
 <div class="stepper-container">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-horizontal-stepper linear #stepper>
-
       <!-- Personal Data -->
       <mat-step [stepControl]="userForm.get('personalData')" formGroupName="personalData">
         <ng-template matStepLabel>Personal Data</ng-template>
@@ -43,7 +42,6 @@
             <mat-option value="professional">Professional</mat-option>
           </mat-select>
         </mat-form-field>
-
         <div>
           <button mat-button matStepperNext type="button">Next</button>
         </div>
@@ -77,11 +75,9 @@
           <button mat-button matStepperNext type="button">Next</button>
         </div>
       </mat-step>
-
       <!-- Medical and Insurance Data -->
       <mat-step [stepControl]="userForm.get('medicalData')" formGroupName="medicalData">
         <ng-template matStepLabel>Step Medical Data</ng-template>
-
         <mat-form-field appearance=" fill" *ngIf="isProfessional">
           <mat-label>Medical Board Number</mat-label>
           <input matInput formControlName="medicalBoardNumber">
@@ -98,23 +94,28 @@
           <mat-label>NHC</mat-label>
           <input matInput formControlName="nhc">
         </mat-form-field>
-        <mat-form-field appearance=" fill" *ngIf="!isProfessional">
-          <mat-label>Insurance Company Name</mat-label>
-          <input matInput formControlName="insuranceCompanyName">
-        </mat-form-field>
-        <mat-form-field appearance="fill" *ngIf="!isProfessional">
-          <mat-label>Insurance Type</mat-label>
-          <mat-select matInput formControlName="insuranceType">
-            <mat-option value='Health'>Health</mat-option>
-            <mat-option value='Family'>Family</mat-option>
-            <mat-option value='Dental'>Dental</mat-option>
-          </mat-select>
-        </mat-form-field>
 
-        <mat-form-field appearance=" fill" *ngIf="!isProfessional">
-          <mat-label>Card Number</mat-label>
-          <input matInput formControlName="cardNumber">
-        </mat-form-field>
+
+        <div formArrayName="insuranceList" *ngIf="!isProfessional">
+          <button mat-button type="button" (click)="onAddInsurance()">Add</button>
+          <div [formGroupName]="i" *ngFor="let insurance of insuranceList.controls; let i = index">
+            <mat-form-field appearance=" fill">
+              <mat-label>Insurance Company Name</mat-label>
+              <input matInput formControlName="insuranceCompanyName">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Insurance Type</mat-label>
+              <input matInput formControlName="insuranceType">
+            </mat-form-field>
+            <mat-form-field appearance=" fill">
+              <mat-label>Card Number</mat-label>
+              <input matInput formControlName="cardNumber">
+            </mat-form-field>
+            <!-- <button mat-button type="button" (click)="removeInsurance(i)">Borrar aseguradora</button> -->
+          </div>
+        </div>
+
+
         <div>
           <button mat-button matStepperPrevious type="button">Back</button>
           <button mat-button matStepperNext type="button">Next</button>
@@ -129,7 +130,9 @@
         </div>
       </mat-step>
     </mat-horizontal-stepper>
-
   </form>
+</div>
+<div>
+  <button mat-button type="button" [routerLink]="['/users']"> Volver </button>
 </div>
 {{userForm.value | json}}

@@ -5,13 +5,13 @@ export interface User {
   firstSurname: string;
   secondSurname: string;
   gender: Gender;
-  birthdate: Date;
+  birthDate: Date;
   nif: string;
   address: Address;
   medicalBoardNumber: string;
   professionalType: ProfessionalType;
   nhc: string;
-  insuranceCompany: InsuranceCompany
+  insuranceList: InsuranceCompany[];
 }
 
 export type Gender = 'Male' | 'Female' | 'Other';
@@ -20,7 +20,7 @@ export type UserType = 'Patient' | 'Professional';
 export type InsuranceType = 'Health' | 'Family' | 'Dental';
 
 export interface Address {
-  street: string;
+  streetName: string;
   streetNumber: string;
   doorNumber: string;
   postalCode: string;

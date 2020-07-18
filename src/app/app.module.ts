@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
@@ -22,6 +23,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { UserEditComponent } from './component/user-edit/user-edit.component';
+import { DialogComponent } from './component/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { UserEditComponent } from './component/user-edit/user-edit.component';
     UserDetailComponent,
     Error404Component,
     UserFormComponent,
-    UserEditComponent
+    UserEditComponent,
+    DialogComponent
   ],
   imports: [
     MatSliderModule,

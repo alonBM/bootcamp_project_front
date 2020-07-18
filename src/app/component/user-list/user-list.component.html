@@ -1,7 +1,7 @@
 <h2>user-list works!</h2>
 <hr>
 <button mat-raised-button color="primary" [routerLink]="['/users','new']">Nuevo Usuario</button>
-<button mat-raised-button color="warn" (click)="onDeleteAllUsers()">Borrar Profesionales</button>
+<button mat-raised-button color="warn" (click)="onDeleteAllDoctors()">Borrar Profesionales</button>
 <hr>
 <div class="example-container mat-elevation-z8">
   <table mat-table [dataSource]="onGetUsers()">
@@ -30,11 +30,11 @@
       <th mat-header-cell *matHeaderCellDef> Icons </th>
       <td mat-cell *matCellDef="let element">
 
-        <mat-icon [routerLink]="['/users',element.id]" >cloud</mat-icon>
+        <mat-icon [routerLink]="['/users',element.id]">cloud</mat-icon>
 
-        <mat-icon [routerLink]="['/users',element.id]" >edit</mat-icon>
+        <mat-icon [routerLink]="['/users/edit',element.id]">edit</mat-icon>
 
-        <mat-icon (click)="onDeleteUser(element.id)">delete</mat-icon>
+        <mat-icon (click)="onOpenDeleteDialog(element.id)">delete</mat-icon>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
