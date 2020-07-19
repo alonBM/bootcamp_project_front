@@ -1,9 +1,61 @@
-Detail Components
-<div class="character-detail" *ngIf="user">
-  <h4>{{user.name}}</h4>
-  <p>{{user.gender}}</p>
-  <h3>CONSEGUIDO!!!</h3>
-</div>
+Usuario: {{user.id}}
+
+<mat-accordion>
+  <!-- #docregion basic-panel -->
+  <!-- #docregion hide-toggle -->
+    <mat-expansion-panel >
+  <!-- #enddocregion hide-toggle -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Personal Data</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p *ngIf = "user.name">This {{user.name}} </p>
+      <p *ngIf = "user.firstSurname">This {{user.firstSurname}} </p>
+      <p *ngIf = "user.secondSurname">This {{user.secondSurname}} </p>
+      <p *ngIf = "user.gender">This {{user.gender}} </p>
+      <p *ngIf = "user.birthDate">This {{user.birthDate}} </p>
+      <p *ngIf = "user.nif"> This {{user.nif}} </p>
+      <p *ngIf = "user.userType">This {{user.userType}} </p>
+    </mat-expansion-panel>
+  <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Address</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p *ngIf="user.address.city">This {{user.address.city}} </p>
+      <p *ngIf="user.address.postalCode">This {{user.address.postalCode}} </p>
+      <p *ngIf="user.address.streetName">This {{user.address.streetName}} </p>
+      <p *ngIf="user.address.streetNumber">This {{user.address.streetNumber}} </p>
+      <p *ngIf="user.address.doorNumber">This {{user.address.doorNumber}} </p>
+    </mat-expansion-panel>
+    <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Medica Data</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p *ngIf = "user.nhc">This {{user.nhc}} </p>
+      <mat-list *ngFor="let insurance of user.insuranceList">
+        <mat-list-item *ngIf="insurance.cardNumber">
+          <b>Card number:</b><span>{{ insurance.cardNumber }}</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="insurance.insuranceCompanyName">
+          <b>Insurance name:</b>
+          <span>{{ insurance.insuranceCompanyName }}</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="insurance.insuranceType">
+          <b>Insurance type:</b>
+          <span>{{ insurance.insuranceType }}</span>
+        </mat-list-item>        
+      </mat-list>
+      
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 
 <div>
   <button mat-button type="button" [routerLink]="['/users']"> Volver </button>

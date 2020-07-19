@@ -73,6 +73,122 @@
         "city": ""
       },
       "id": 14
+    },
+    {
+      "name": "EL nuevo de las",
+      "firstSurname": "COmpañias",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "",
+      "userType": "pacient",
+      "medicalBoardNumber": "",
+      "professionalType": "",
+      "nhc": "",
+      "insuranceList": [
+        {
+          "insuranceCompanyName": "Campany 1",
+          "insuranceType": "Seguro",
+          "cardNumber": "asdasd"
+        },
+        {
+          "insuranceCompanyName": "company2",
+          "insuranceType": "com",
+          "cardNumber": "2312312"
+        }
+      ],
+      "address": {
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": ""
+      },
+      "id": 15
+    },
+    {
+      "name": "asd",
+      "firstSurname": "asdsa",
+      "secondSurname": "",
+      "gender": "Male",
+      "birthDate": "",
+      "nif": "asdasd",
+      "userType": "professional",
+      "medicalBoardNumber": "asdasd",
+      "professionalType": "Doctor",
+      "insuranceList": [],
+      "address": {
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": "asddas"
+      },
+      "id": 16
+    },
+    {
+      "name": "asdsa",
+      "firstSurname": "asdsa",
+      "secondSurname": "asd",
+      "gender": "Male",
+      "birthDate": "",
+      "nif": "adsds",
+      "userType": "patient",
+      "nhc": "asdasd",
+      "insuranceList": [],
+      "address": {
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "as",
+        "city": "asdasd"
+      },
+      "id": 17
+    },
+    {
+      "name": "asdas",
+      "firstSurname": "sad",
+      "secondSurname": "",
+      "gender": "Male",
+      "birthDate": "",
+      "nif": "asdasd",
+      "userType": "patient",
+      "nhc": "sadasd",
+      "insuranceList": [
+        {
+          "insuranceCompanyName": "dasd",
+          "insuranceType": "asd",
+          "cardNumber": "asdasd"
+        }
+      ],
+      "address": {
+        "street": "asdasd",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": "asdasd"
+      },
+      "id": 18
+    },
+    {
+      "name": "asdas",
+      "firstSurname": "asdas",
+      "secondSurname": "",
+      "gender": "Male",
+      "birthDate": "",
+      "nif": "asdasd",
+      "userType": "professional",
+      "medicalBoardNumber": "asdasd",
+      "professionalType": "Doctor",
+      "insuranceList": [],
+      "address": {
+        "street": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": "asdasd"
+      },
+      "id": 19
     }
   ]
 }

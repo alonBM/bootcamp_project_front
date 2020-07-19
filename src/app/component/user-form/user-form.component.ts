@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user.model';
+import { User, } from 'src/app/models/user.model';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
+
+
 
 @Component({
   selector: 'app-user-form',
@@ -16,19 +18,19 @@ export class UserFormComponent implements OnInit {
   user = {};
   userId: number;
   maxDate = new Date();
-
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) { }
+
   ngOnInit(): void {
     this.createUserForm();
-    // Set form values if edit mode.
+    // If in update, get de values from user which have to updated.
     this.userId = this.route.snapshot.params.id;
     if (this.userId) {
-      console.log('entro a editar');
       this.setFormValues(this.userId);
     }
+    console.log(this.userForm)
   }
 
 
@@ -96,31 +98,31 @@ export class UserFormComponent implements OnInit {
   createUserForm(): void {
     this.userForm = new FormGroup({
       'personalData': new FormGroup({
-        'name': new FormControl(''),
-        'firstSurname': new FormControl(''),
+        'name': new FormControl('', Validators.required),
+        'firstSurname': new FormControl('', Validators.required),
         'secondSurname': new FormControl(''),
-        'gender': new FormControl(''),
+        'gender': new FormControl('Male'),
         'birthDate': new FormControl(''),
-        'nif': new FormControl(''),
-        'userType': new FormControl('')
+        'nif': new FormControl('', Validators.required),
+        'userType': new FormControl('patient')
       }),
       'address': new FormGroup({
         'street': new FormControl(''),
         'streetNumber': new FormControl(''),
         'doorNumber': new FormControl(''),
         'postalCode': new FormControl(''),
-        'city': new FormControl('')
+        'city': new FormControl('', Validators.required)
       }),
       'medicalData': new FormGroup({
-        'medicalBoardNumber': new FormControl(''),
-        'professionalType': new FormControl(''),
-        'nhc': new FormControl(''),
+        'medicalBoardNumber': new FormControl('', Validators.required),
+        'professionalType': new FormControl('Doctor'),
+        'nhc': new FormControl('', Validators.required),
         'insuranceList': new FormArray([])
       }),
     })
   }
 
-  onAddInsurance() {
+  onAddInsurance(): void {
     const groupControl = new FormGroup({
       'insuranceCompanyName': new FormControl(''),
       'insuranceType': new FormControl(''),
@@ -134,7 +136,7 @@ export class UserFormComponent implements OnInit {
     return this.userForm.get('medicalData').get('insuranceList') as FormArray;
   }
 
-  
+
   buildUser(): void {
     const userValue = this.userForm.value;
     this.user = {
@@ -151,20 +153,36 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('userId es', this.userId)
+    //construimos el objeto con los datos a enviar
     this.buildUser();
+    if (this.isProfessional) {
+      (<FormGroup>this.userForm.get('medicalData')).removeControl('nhc');
+      (<FormGroup>this.userForm.get('medicalData')).removeControl('insuranceList');
+    } else {
+      (<FormGroup>this.userForm.get('medicalData')).removeControl('medicalBoardNumber');
+      (<FormGroup>this.userForm.get('medicalData')).removeControl('professionalType');
+    }
     if (this.userId) {
-      console.log('actualizo/update')
       this.userService.updateUser(this.userId, <User>this.user).subscribe(() => {
         this.router.navigate(['/users']);
       });
     } else {
-      console.log('creo');
       this.userService.createUser(<User>this.user).subscribe(() => {
         this.router.navigate(['/users']);
       })
     }
 
+  }
+
+  
+  setCorrectValidators(): void {
+    if (this.isProfessional) {
+      this.userForm.get('medicalData').get('nhc').clearValidators();
+      this.userForm.get('medicalData').get('nhc').updateValueAndValidity();
+    } else {
+      this.userForm.get('medicalData').get('medicalBoardNumber').clearValidators();
+      this.userForm.get('medicalData').get('medicalBoardNumber').updateValueAndValidity();
+    }
   }
 
 }
