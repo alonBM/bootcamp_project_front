@@ -1,0 +1,12 @@
+div {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(216, 98, 98);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+  & h2 {
+    font-size: 5rem;
+  }
+}

@@ -1,194 +1,23 @@
 {
   "users": [
     {
-      "name": "Paco",
-      "firstSurname": "Pedro",
-      "secondSurname": "Martinez",
-      "gender": "Female",
-      "birthDate": "2020-07-07T22:00:00.000Z",
-      "nif": "",
-      "userType": "pacient",
-      "medicalBoardNumber": "",
-      "professionalType": "",
-      "nhc": "",
-      "insuranceList": [
-        {
-          "insuranceCompanyName": "Seguro Uno",
-          "insuranceType": "Salud",
-          "cardNumber": "1"
-        },
-        {
-          "insuranceCompanyName": "Segurro Dos",
-          "insuranceType": "Dental",
-          "cardNumber": "2"
-        }
-      ],
-      "address": {
-        "street": "",
-        "streetNumber": "123",
-        "doorNumber": "hola",
-        "postalCode": "12345",
-        "city": ""
-      },
-      "id": 12
-    },
-    {
-      "name": "HOla",
-      "firstSurname": "",
-      "secondSurname": "",
-      "gender": "",
-      "birthDate": "",
-      "nif": "",
-      "userType": "",
-      "medicalBoardNumber": "",
-      "professionalType": "",
-      "nhc": "",
-      "insuranceList": [],
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": ""
-      },
-      "id": 13
-    },
-    {
-      "name": "hehe",
-      "firstSurname": "",
-      "secondSurname": "",
-      "gender": "",
-      "birthDate": "",
-      "nif": "",
-      "userType": "",
-      "medicalBoardNumber": "",
-      "professionalType": "",
-      "nhc": "",
-      "insuranceList": [],
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": ""
-      },
-      "id": 14
-    },
-    {
-      "name": "EL nuevo de las",
-      "firstSurname": "COmpañias",
-      "secondSurname": "",
-      "gender": "",
-      "birthDate": "",
-      "nif": "",
-      "userType": "pacient",
-      "medicalBoardNumber": "",
-      "professionalType": "",
-      "nhc": "",
-      "insuranceList": [
-        {
-          "insuranceCompanyName": "Campany 1",
-          "insuranceType": "Seguro",
-          "cardNumber": "asdasd"
-        },
-        {
-          "insuranceCompanyName": "company2",
-          "insuranceType": "com",
-          "cardNumber": "2312312"
-        }
-      ],
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": ""
-      },
-      "id": 15
-    },
-    {
-      "name": "asd",
-      "firstSurname": "asdsa",
-      "secondSurname": "",
+      "name": "Humberto",
+      "firstSurname": "Alonso",
+      "secondSurname": "Bertea",
       "gender": "Male",
       "birthDate": "",
-      "nif": "asdasd",
+      "nif": "12312312",
       "userType": "professional",
-      "medicalBoardNumber": "asdasd",
+      "medicalBoardNumber": "123123123",
       "professionalType": "Doctor",
-      "insuranceList": [],
       "address": {
         "street": "",
         "streetNumber": "",
         "doorNumber": "",
         "postalCode": "",
-        "city": "asddas"
+        "city": "AAAA"
       },
-      "id": 16
-    },
-    {
-      "name": "asdsa",
-      "firstSurname": "asdsa",
-      "secondSurname": "asd",
-      "gender": "Male",
-      "birthDate": "",
-      "nif": "adsds",
-      "userType": "patient",
-      "nhc": "asdasd",
-      "insuranceList": [],
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "as",
-        "city": "asdasd"
-      },
-      "id": 17
-    },
-    {
-      "name": "asdas",
-      "firstSurname": "sad",
-      "secondSurname": "",
-      "gender": "Male",
-      "birthDate": "",
-      "nif": "asdasd",
-      "userType": "patient",
-      "nhc": "sadasd",
-      "insuranceList": [
-        {
-          "insuranceCompanyName": "dasd",
-          "insuranceType": "asd",
-          "cardNumber": "asdasd"
-        }
-      ],
-      "address": {
-        "street": "asdasd",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": "asdasd"
-      },
-      "id": 18
-    },
-    {
-      "name": "asdas",
-      "firstSurname": "asdas",
-      "secondSurname": "",
-      "gender": "Male",
-      "birthDate": "",
-      "nif": "asdasd",
-      "userType": "professional",
-      "medicalBoardNumber": "asdasd",
-      "professionalType": "Doctor",
-      "insuranceList": [],
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": "asdasd"
-      },
-      "id": 19
+      "id": 1
     }
   ]
 }

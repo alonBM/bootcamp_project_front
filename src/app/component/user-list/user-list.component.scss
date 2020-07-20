@@ -1,11 +1,19 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
 .example-container {
-  height: 400px;
+  height: 70vh;
   width: 80vw;
   overflow: auto;
 }
 
 table {
-  width: 800px;
+  width: 100%;
 }
 
 td.mat-column-star {
@@ -28,4 +36,24 @@ td.mat-column-position {
 
 mat-icon {
   cursor: pointer;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.detail-icon {
+  color: grey;
+}
+
+.edit-icon {
+  color: rgb(77, 77, 192);
+}
+
+.delete-icon {
+  color: rgb(192, 56, 56);
 }

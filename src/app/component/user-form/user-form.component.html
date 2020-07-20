@@ -7,7 +7,7 @@
           <ng-template matStepLabel>Personal Data</ng-template>
           <div class="form-step">
             <div>
-              <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
+              <button mat-raised-button color="primary" matStepperNext type="button" class="next-button">Next</button>
             </div>
 
             <mat-form-field appearance="fill">
@@ -47,7 +47,6 @@
                 <mat-option value="professional">Professional</mat-option>
               </mat-select>
             </mat-form-field>
-
           </div>
         </mat-step>
 
@@ -55,7 +54,7 @@
         <mat-step [stepControl]="userForm.get('address')" formGroupName="address">
           <ng-template matStepLabel>Address</ng-template>
           <div class="form-step">
-            <div>
+            <div class="next-button">
               <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
               <button mat-raised-button color="primary" matStepperNext type="button"
                 (click)=setCorrectValidators()>Next</button>
@@ -80,8 +79,6 @@
               <mat-label>City</mat-label>
               <input matInput formControlName="city">
             </mat-form-field>
-
-
           </div>
 
         </mat-step>
@@ -89,11 +86,11 @@
         <mat-step [stepControl]="userForm.get('medicalData')" formGroupName="medicalData">
           <ng-template matStepLabel>Medical Data</ng-template>
           <div class="form-step">
-            <div>
+            <div class="next-button">
               <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
               <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
             </div>
-            <mat-form-field appearance=" fill" *ngIf="isProfessional">
+            <mat-form-field appearance="fill" *ngIf="isProfessional">
               <mat-label>Medical Board Number</mat-label>
               <input matInput formControlName="medicalBoardNumber">
             </mat-form-field>
@@ -105,14 +102,15 @@
                 <mat-option value='Administrative'>Administrative</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance=" fill" *ngIf="!isProfessional">
+            <mat-form-field appearance="fill" *ngIf="!isProfessional">
               <mat-label>NHC</mat-label>
               <input matInput formControlName="nhc">
             </mat-form-field>
 
-            <div formArrayName="insuranceList" *ngIf="!isProfessional">
+            <div class="add-insurance-list" formArrayName="insuranceList" *ngIf="!isProfessional">
               <button mat-raised-button color="primary" type="button" (click)="onAddInsurance()">Add Insurance</button>
-              <div [formGroupName]="i" *ngFor="let insurance of insuranceList.controls; let i = index">
+              <div class="insurances-container" [formGroupName]="i"
+                *ngFor="let insurance of insuranceList.controls; let i = index">
                 <mat-form-field appearance="fill">
                   <mat-label>Insurance Company Name</mat-label>
                   <input matInput formControlName="insuranceCompanyName">
@@ -133,10 +131,10 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <div>
+          <div class="final-buttons">
             <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
-            <button mat-raised-button color="primary" type="submit" *ngIf="!userId">Añadir Usuario</button>
-            <button mat-raised-button color="primary" type="submit" *ngIf="userId">Actualizar</button>
+            <button mat-raised-button color="primary" type="submit" *ngIf="!userId">Add User</button>
+            <button mat-raised-button color="primary" type="submit" *ngIf="userId">Update</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>
@@ -145,6 +143,5 @@
   <div class="button-back">
     <button mat-raised-button color="warn" type="button" [routerLink]="['/users']">Back to home</button>
   </div>
-  //{{userForm.value | json}}
 
 </div>

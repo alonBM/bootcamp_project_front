@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.container {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+}
+
+mat-accordion {
+  width: 100%;
+}
+
+.button-back {
+  margin-top: 2em;
+}
+
+span {
+  font-weight: 700;
+}

@@ -23,6 +23,36 @@ mat-form-field {
   margin-top: 1em;
 }
 
+.next-button {
+  margin-bottom: 1em;
+
+  &>button {
+    margin-right: 5px;
+  }
+}
+
+.insurances-container {
+  &>mat-form-field {
+    width: 30%;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
+}
+
+.add-insurance-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.final-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
 @media (min-width: 447px) {
   mat-form-field {
     width: 30vw;

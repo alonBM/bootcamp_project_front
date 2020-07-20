@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class UserListComponent implements OnInit {
   displayedColumns =
-    ['name', 'position', 'weight', 'symbol', 'icons'];
+    ['id', 'nhc', 'medicalBoardNumber', 'name', 'firstSurname', 'icons'];
   users: User[];
   constructor(private userService: UserService, public dialog: MatDialog) {
   }
@@ -26,40 +26,33 @@ export class UserListComponent implements OnInit {
   }
 
   onDeleteUser(id: number): void {
-    console.log(id);
     this.userService.deleteUser(id).subscribe(console.log);
     this.userService.getAllUsers();
   }
 
   onOpenDeleteDialog(id: number): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '400px',
+      width: '200px',
       data: {
         title: 'Delete user ' + id,
-        body: 'Are you sure you want to delete this user?',
+        body: 'Are you sure ?',
       },
     });
     dialogRef.afterClosed().subscribe((data) => {
-      this.userService.deleteUser(id).subscribe(() => {
-        this.userService.getAllUsers();
-      })
-    })
+      if (data) {
+
+        this.userService.deleteUser(id).subscribe(() => {
+          this.userService.getAllUsers();
+        });
+
+      }
+    });
   }
 
   onDeleteAllDoctors() {
-    // const doctors: User[] = this.users.filter(
-    //   (user: User) => user.professionalType === 'Doctor'
-    // );deleteAllDoctors()
     this.userService.deleteAllDoctors().subscribe(() => {
       this.userService.getAllUsers();
-    }
-
-    )
-    // console.log(doctors);
-
-
-    // this.userService.deleteAllUsers(this.users);
-    // console.log(this.users, "deleted all users");
+    });
   }
 
 }

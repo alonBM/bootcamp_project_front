@@ -154,7 +154,7 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(): void {
     //construimos el objeto con los datos a enviar
-    this.buildUser();
+
     if (this.isProfessional) {
       (<FormGroup>this.userForm.get('medicalData')).removeControl('nhc');
       (<FormGroup>this.userForm.get('medicalData')).removeControl('insuranceList');
@@ -162,6 +162,7 @@ export class UserFormComponent implements OnInit {
       (<FormGroup>this.userForm.get('medicalData')).removeControl('medicalBoardNumber');
       (<FormGroup>this.userForm.get('medicalData')).removeControl('professionalType');
     }
+    this.buildUser();
     if (this.userId) {
       this.userService.updateUser(this.userId, <User>this.user).subscribe(() => {
         this.router.navigate(['/users']);
@@ -174,7 +175,7 @@ export class UserFormComponent implements OnInit {
 
   }
 
-  
+
   setCorrectValidators(): void {
     if (this.isProfessional) {
       this.userForm.get('medicalData').get('nhc').clearValidators();
