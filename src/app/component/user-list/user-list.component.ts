@@ -18,7 +18,9 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe((data: User[][]) => {
+      this.users = data[0].concat(data[1]);
+    });
   }
 
   onGetUsers() {
@@ -40,7 +42,6 @@ export class UserListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-
         this.userService.deleteUser(id).subscribe(() => {
           this.userService.getAllUsers();
         });

@@ -1,23 +1,50 @@
 {
-  "users": [
-    {
-      "name": "Humberto",
-      "firstSurname": "Alonso",
-      "secondSurname": "Bertea",
-      "gender": "Male",
-      "birthDate": "",
-      "nif": "12312312",
-      "userType": "professional",
-      "medicalBoardNumber": "123123123",
-      "professionalType": "Doctor",
-      "address": {
-        "street": "",
-        "streetNumber": "",
-        "doorNumber": "",
-        "postalCode": "",
-        "city": "AAAA"
+  "patients": [{
+    "id": "1",
+    "name": "Ollie",
+    "firstSurname": "Hamilton",
+    "nhc": "237864783242",
+    "userType": "Patient",
+    "gender": "Male",
+    "secondSurname": null,
+    "birthdate": "1995-05-23T22:00:00.000Z",
+    "nif": "88888888Z",
+    "address": {
+      "city": "Barcelona",
+      "doorNumber": "",
+      "street": "",
+      "streetNumber": "",
+      "postalCode": "08027"
+    },
+    "insuranceCompanies": [{
+        "cardNumber": "243254124243",
+        "insuranceCompanyName": null,
+        "insuranceType": "Health"
       },
-      "id": 1
+      {
+        "cardNumber": "325423423142",
+        "insuranceCompanyName": "Insurance X",
+        "insuranceType": "Family"
+      }
+    ]
+  }],
+  "professionals": [{
+    "id": "2",
+    "name": "Alex",
+    "firstSurname": "Hayes",
+    "userType": "Professional",
+    "gender": "Male",
+    "secondSurname": null,
+    "birthdate": "1995-05-23T22:00:00.000Z",
+    "nif": "88888888Z",
+    "professionalType": "Doctor",
+    "medicalBoardNumber": "2342427984",
+    "address": {
+      "city": "Barcelona",
+      "doorNumber": "",
+      "street": "",
+      "streetNumber": "",
+      "postalCode": "69234"
     }
-  ]
+  }]
 }

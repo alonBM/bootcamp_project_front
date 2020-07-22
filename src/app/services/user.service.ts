@@ -2,20 +2,31 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user.model';
 import { forkJoin, Observable } from 'rxjs';
+import { Patient } from '../models/patient.model';
+import { Professional } from '../models/professional.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private API_BASE_URL = 'http://localhost:3000';
-  private users: User[];
-
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllUsers(): any {
-    return this.httpClient.get<User[]>(this.API_BASE_URL + '/users/')
-      .subscribe(users => this.users = users);
+  getAllUsers(): Observable<User[][]> {
+    const users: Observable<User[]>[] = [];
+    users.push(this.getAllPatients());
+    users.push(this.getAllProfessionals());
+    return forkJoin(users);
+  }
+
+  getAllPatients(): Observable<Patient[]> {
+    return this.httpClient.get<Patient[]>(this.API_BASE_URL + '/patients/');
+  }
+
+  getAllProfessionals(): Observable<Professional[]> {
+    return this.httpClient.get<Professional[]>(this.API_BASE_URL + '/professionals/');
+
   }
 
   getUsers(): User[] {
@@ -27,15 +38,16 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.API_BASE_URL + '/users', user)
+    return this.httpClient.post<User>(this.API_BASE_URL + '/users', user);
   }
+
 
   deleteUser(id: number): Observable<User> {
     return this.httpClient.delete<User>(this.API_BASE_URL + '/users/' + id);
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user)
+    return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user);
   }
 
   deleteAllDoctors(): any {
@@ -50,8 +62,7 @@ export class UserService {
     }
 
     return forkJoin(deleteDoctorsPetitions);
-    //filter our users array.
-    //for each, deleteUser(index)
+
 
   }
 

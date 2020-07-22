@@ -5,14 +5,13 @@
 
   </div>
   <div class="example-container mat-elevation-z8">
-    <table mat-table [dataSource]="onGetUsers()">      
+    <table mat-table [dataSource]="users">
 
       <!-- Name Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID</th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
-
       <ng-container matColumnDef="nhc">
         <th mat-header-cell *matHeaderCellDef> NHC </th>
         <td mat-cell *matCellDef="let element"> {{element.nhc}} </td>

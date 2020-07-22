@@ -30,7 +30,7 @@ export class UserFormComponent implements OnInit {
     if (this.userId) {
       this.setFormValues(this.userId);
     }
-    console.log(this.userForm)
+    console.log(this.userForm);
   }
 
 
@@ -43,8 +43,8 @@ export class UserFormComponent implements OnInit {
           insuranceType: new FormControl(element.insuranceType),
           cardNumber: new FormControl(element.cardNumber)
         })
-      )
-    })
+      );
+    });
     return formGroup;
   }
 
@@ -52,7 +52,7 @@ export class UserFormComponent implements OnInit {
     this.userService.getUser(id).subscribe((user) => {
       // console.log(this.getInsuraces(user));
       // console.log('user insurances:', this.getInsuraces(user))
-      console.log('las listas son:  ', user.insuranceList)
+      console.log('las listas son:  ', user.insuranceList);
       this.userForm.get('personalData').patchValue({
         name: user.name,
         firstSurname: user.firstSurname,
@@ -61,14 +61,14 @@ export class UserFormComponent implements OnInit {
         birthDate: user.birthDate,
         nif: user.nif,
         userType: user.userType
-      })
+      });
       this.userForm.get('address').patchValue({
         streetName: user.address.streetName,
         streetNumber: user.address.streetNumber,
         doorNumber: user.address.doorNumber,
         postalCode: user.address.postalCode,
         city: user.address.city
-      })
+      });
       this.userForm.get('medicalData').patchValue({
         nhc: user.nhc,
         medicalBoardNumber: user.medicalBoardNumber,
@@ -80,56 +80,45 @@ export class UserFormComponent implements OnInit {
       this.getInsuraceListFormGroup(user).forEach((element) => {
         formArrayControl.push(element);
       });
-
-      (<FormGroup>this.userForm.get('medicalData')).setControl('insuranceList', formArrayControl)
-      // this.userForm.setControl('medicalData.insuranceList', formArrayControl );
-
-      // (<FormArray>this.userForm.get('medicalData'))
-      //  this.getInsuraceListFormGroup()
-      // // .setControl(3,);
-      // this.insuranceList.setControl(3,this.getInsuraceListFormGroup(user))
-      // array = new FormArray()
-      // this.insuranceList.setControl(3, <AbstractControl>user.insuranceList);
-
-
-    })
+      (this.userForm.get('medicalData') as FormGroup).setControl('insuranceList', formArrayControl)
+    });
   }
 
   createUserForm(): void {
     this.userForm = new FormGroup({
-      'personalData': new FormGroup({
-        'name': new FormControl('', Validators.required),
-        'firstSurname': new FormControl('', Validators.required),
-        'secondSurname': new FormControl(''),
-        'gender': new FormControl('Male'),
-        'birthDate': new FormControl(''),
-        'nif': new FormControl('', Validators.required),
-        'userType': new FormControl('patient')
+      personalData: new FormGroup({
+        name: new FormControl('', Validators.required),
+        firstSurname: new FormControl('', Validators.required),
+        secondSurname: new FormControl(''),
+        gender: new FormControl('Male'),
+        birthDate: new FormControl(''),
+        nif: new FormControl('', Validators.required),
+        userType: new FormControl('patient')
       }),
-      'address': new FormGroup({
-        'street': new FormControl(''),
-        'streetNumber': new FormControl(''),
-        'doorNumber': new FormControl(''),
-        'postalCode': new FormControl(''),
-        'city': new FormControl('', Validators.required)
+      address: new FormGroup({
+        street: new FormControl(''),
+        streetNumber: new FormControl(''),
+        doorNumber: new FormControl(''),
+        postalCode: new FormControl(''),
+        city: new FormControl('', Validators.required)
       }),
-      'medicalData': new FormGroup({
-        'medicalBoardNumber': new FormControl('', Validators.required),
-        'professionalType': new FormControl('Doctor'),
-        'nhc': new FormControl('', Validators.required),
-        'insuranceList': new FormArray([])
+      medicalData: new FormGroup({
+        medicalBoardNumber: new FormControl('', Validators.required),
+        professionalType: new FormControl('Doctor'),
+        nhc: new FormControl('', Validators.required),
+        insuranceList: new FormArray([])
       }),
-    })
+    });
   }
 
   onAddInsurance(): void {
     const groupControl = new FormGroup({
-      'insuranceCompanyName': new FormControl(''),
-      'insuranceType': new FormControl(''),
-      'cardNumber': new FormControl('')
-    })
-    console.log(groupControl)
-    this.insuranceList.push(groupControl)
+      insuranceCompanyName: new FormControl(''),
+      insuranceType: new FormControl(''),
+      cardNumber: new FormControl('')
+    });
+    console.log(groupControl);
+    this.insuranceList.push(groupControl);
   }
 
   get insuranceList(): FormArray {
@@ -143,7 +132,7 @@ export class UserFormComponent implements OnInit {
       ...userValue.personalData,
       ...userValue.medicalData,
       address: userValue.address
-    }
+    };
     console.log('objeto user: ', this.user);
   }
 
@@ -153,22 +142,22 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //construimos el objeto con los datos a enviar
+    // construimos el objeto con los datos a enviar
 
     if (this.isProfessional) {
-      (<FormGroup>this.userForm.get('medicalData')).removeControl('nhc');
-      (<FormGroup>this.userForm.get('medicalData')).removeControl('insuranceList');
+      (this.userForm.get('medicalData') as FormGroup).removeControl('nhc');
+      (this.userForm.get('medicalData') as FormGroup).removeControl('insuranceList');
     } else {
-      (<FormGroup>this.userForm.get('medicalData')).removeControl('medicalBoardNumber');
-      (<FormGroup>this.userForm.get('medicalData')).removeControl('professionalType');
+      (this.userForm.get('medicalData') as FormGroup).removeControl('medicalBoardNumber');
+      (this.userForm.get('medicalData') as FormGroup).removeControl('professionalType');
     }
     this.buildUser();
     if (this.userId) {
-      this.userService.updateUser(this.userId, <User>this.user).subscribe(() => {
+      this.userService.updateUser(this.userId, this.user as User).subscribe(() => {
         this.router.navigate(['/users']);
       });
     } else {
-      this.userService.createUser(<User>this.user).subscribe(() => {
+      this.userService.createUser(this.user as User).subscribe(() => {
         this.router.navigate(['/users']);
       })
     }
