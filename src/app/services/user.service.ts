@@ -29,25 +29,22 @@ export class UserService {
 
   }
 
-  // getUsers(): User[] {
-  //   return this.users;
-  // }
-
-  getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(this.API_BASE_URL + '/users/' + id);
+  getUser(id: string, param: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.API_BASE_URL}/${param}/${id}`);
   }
-
-  createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.API_BASE_URL + '/users', user);
-  }
-
 
   deleteUser(id: number, param: string): Observable<User> {
     return this.httpClient.delete<User>(`${this.API_BASE_URL}/${param}/${id}`);
   }
 
-  updateUser(id: number, user: User): Observable<User> {
-    return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user);
-  }
+
+
+
+  // createUser(user: User): Observable<User> {
+  //   return this.httpClient.post<User>(this.API_BASE_URL + '/users', user);
+  // }
+  // updateUser(id: number, user: User): Observable<User> {
+  //   return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user);
+  // }
 
 }

@@ -7,7 +7,6 @@ export interface User {
   birthDate: Date;
   nif: string;
   address: Address;
-  nhc: string;
   userType: UserType;
 }
 

@@ -10,20 +10,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserDetailComponent implements OnInit {
   user: User;
-  loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
-  /**
-   * 
-   */
+
   ngOnInit(): void {
-    this.userService.getUser(this.route.snapshot.params.id)
+    const params = this.route.snapshot.params;
+    this.userService.getUser(params.id, params.resource)
       .subscribe(data => {
         this.user = data;
-        this.loading = false;
       });
   }
+
+  getUser(): void {
+
+  }
+
+
 }

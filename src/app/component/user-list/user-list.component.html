@@ -34,7 +34,8 @@
       <ng-container matColumnDef="icons">
         <th mat-header-cell *matHeaderCellDef> Icons</th>
         <td mat-cell *matCellDef="let user">
-          <mat-icon class="detail-icon" [routerLink]="['/users',user.id]">search</mat-icon>
+          <mat-icon class="detail-icon" routerLink="/users/{{user.nhc ? 'patients' : 'professionals'}}/{{ user.id }}">
+            search</mat-icon>
           <mat-icon class="edit-icon" [routerLink]="['/users/edit',user.id]">edit</mat-icon>
           <mat-icon class="delete-icon" (click)="onOpenDeleteDialog(user)">delete</mat-icon>
         </td>

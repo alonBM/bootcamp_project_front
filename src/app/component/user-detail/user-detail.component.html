@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="container">
-    <mat-accordion *ngIf="!loading">
+    <mat-accordion *ngIf="user">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -34,8 +34,10 @@
             <h2>Medical Data</h2>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p *ngIf="user.nhc"><span>NHC: </span> {{user.nhc}} </p>
-        <mat-list *ngFor="let insurance of user.insuranceList">
+        <p *ngIf="user['nhc']"><span>NHC: </span> {{user['nhc']}} </p>
+        <p *ngIf="user['medicalBoardNumber']"><span>MBN: </span> {{user['medicalBoardNumber']}} </p>
+        <p *ngIf="user['professionalType']"><span>Type: </span> {{user['professionalType']}} </p>
+        <mat-list *ngFor="let insurance of user['insuranceList']">
           <mat-list-item *ngIf="insurance.cardNumber">
             <b>Card number:</b><span>{{ insurance.cardNumber }}</span>
           </mat-list-item>
