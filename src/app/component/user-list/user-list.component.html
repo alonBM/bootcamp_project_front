@@ -1,43 +1,42 @@
 <div class="container">
   <div class="action-buttons">
     <button mat-raised-button color="primary" [routerLink]="['/users','new']">New User</button>
-    <button mat-raised-button color="warn" (click)="onDeleteAllDoctors()">Delete Doctors</button>
+    <button mat-raised-button color="warn" (click)="deleteAllDoctors()">Delete Doctors</button>
 
   </div>
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="users">
-
       <!-- Name Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID</th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
       </ng-container>
       <ng-container matColumnDef="nhc">
         <th mat-header-cell *matHeaderCellDef> NHC </th>
-        <td mat-cell *matCellDef="let element"> {{element.nhc}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.nhc}} </td>
       </ng-container>
       <!-- medicalBoardNumber Column -->
       <ng-container matColumnDef="medicalBoardNumber">
         <th mat-header-cell *matHeaderCellDef> MBN </th>
-        <td mat-cell *matCellDef="let element"> {{element.medicalBoardNumber}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.medicalBoardNumber}} </td>
       </ng-container>
       <!-- name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.name}} </td>
       </ng-container>
       <!-- firstSurname Column -->
       <ng-container matColumnDef="firstSurname">
         <th mat-header-cell *matHeaderCellDef> First Surname </th>
-        <td mat-cell *matCellDef="let element"> {{element.firstSurname}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.firstSurname}} </td>
       </ng-container>
       <!-- icons Column -->
       <ng-container matColumnDef="icons">
         <th mat-header-cell *matHeaderCellDef> Icons</th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon class="detail-icon" [routerLink]="['/users',element.id]">search</mat-icon>
-          <mat-icon class="edit-icon" [routerLink]="['/users/edit',element.id]">edit</mat-icon>
-          <mat-icon class="delete-icon" (click)="onOpenDeleteDialog(element.id)">delete</mat-icon>
+        <td mat-cell *matCellDef="let user">
+          <mat-icon class="detail-icon" [routerLink]="['/users',user.id]">search</mat-icon>
+          <mat-icon class="edit-icon" [routerLink]="['/users/edit',user.id]">edit</mat-icon>
+          <mat-icon class="delete-icon" (click)="onOpenDeleteDialog(user)">delete</mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

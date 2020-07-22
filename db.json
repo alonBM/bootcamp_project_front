@@ -29,22 +29,42 @@
     ]
   }],
   "professionals": [{
-    "id": "2",
-    "name": "Alex",
-    "firstSurname": "Hayes",
-    "userType": "Professional",
-    "gender": "Male",
-    "secondSurname": null,
-    "birthdate": "1995-05-23T22:00:00.000Z",
-    "nif": "88888888Z",
-    "professionalType": "Doctor",
-    "medicalBoardNumber": "2342427984",
-    "address": {
-      "city": "Barcelona",
-      "doorNumber": "",
-      "street": "",
-      "streetNumber": "",
-      "postalCode": "69234"
+      "id": "2",
+      "name": "Alex",
+      "firstSurname": "Hayes",
+      "userType": "Professional",
+      "gender": "Male",
+      "secondSurname": null,
+      "birthdate": "1995-05-23T22:00:00.000Z",
+      "nif": "88888888Z",
+      "professionalType": "Doctor",
+      "medicalBoardNumber": "2342427984",
+      "address": {
+        "city": "Barcelona",
+        "doorNumber": "",
+        "street": "",
+        "streetNumber": "",
+        "postalCode": "69234"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Alex 2",
+      "firstSurname": "Hayes",
+      "userType": "Professional",
+      "gender": "Male",
+      "secondSurname": null,
+      "birthdate": "1995-05-23T22:00:00.000Z",
+      "nif": "88888888Z",
+      "professionalType": "Doctor",
+      "medicalBoardNumber": "2342427984",
+      "address": {
+        "city": "Barcelona",
+        "doorNumber": "",
+        "street": "",
+        "streetNumber": "",
+        "postalCode": "69234"
+      }
     }
-  }]
+  ]
 }

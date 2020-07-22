@@ -29,9 +29,9 @@ export class UserService {
 
   }
 
-  getUsers(): User[] {
-    return this.users;
-  }
+  // getUsers(): User[] {
+  //   return this.users;
+  // }
 
   getUser(id: number): Observable<User> {
     return this.httpClient.get<User>(this.API_BASE_URL + '/users/' + id);
@@ -42,28 +42,12 @@ export class UserService {
   }
 
 
-  deleteUser(id: number): Observable<User> {
-    return this.httpClient.delete<User>(this.API_BASE_URL + '/users/' + id);
+  deleteUser(id: number, param: string): Observable<User> {
+    return this.httpClient.delete<User>(`${this.API_BASE_URL}/${param}/${id}`);
   }
 
   updateUser(id: number, user: User): Observable<User> {
     return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user);
-  }
-
-  deleteAllDoctors(): any {
-
-    const doctors: User[] = this.users.filter(
-      (user) => user.professionalType === 'Doctor'
-    );
-
-    const deleteDoctorsPetitions: Observable<User>[] = [];
-    for (let doctor of doctors) {
-      deleteDoctorsPetitions.push(this.deleteUser(doctor.id));
-    }
-
-    return forkJoin(deleteDoctorsPetitions);
-
-
   }
 
 }
