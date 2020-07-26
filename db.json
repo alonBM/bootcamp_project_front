@@ -16,7 +16,7 @@
       "streetNumber": "",
       "postalCode": "08027"
     },
-    "insuranceCompanies": [{
+    "insuranceList": [{
         "cardNumber": "243254124243",
         "insuranceCompanyName": null,
         "insuranceType": "Health"

@@ -3,9 +3,8 @@ import { UserService } from 'src/app/services/user.service';
 import { User, } from 'src/app/models/user.model';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
-
-
+import { Professional } from 'src/app/models/professional.model';
+import { Patient } from 'src/app/models/patient.model';
 
 @Component({
   selector: 'app-user-form',
@@ -13,47 +12,88 @@ import { Route } from '@angular/compiler/src/core';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-  userForm: FormGroup;
+
+  patientForm: FormGroup;
+  professionalForm: FormGroup;
+  personalForm: FormGroup;
+  addressForm: FormGroup;
   isProfessional: boolean;
+  userType: string;
+  userId: string;
   user = {};
-  userId: number;
   maxDate = new Date();
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.createUserForm();
-    // If in update, get de values from user which have to updated.
+    this.setPersonalForm();
+    this.setAddressForm();
+    this.setProfessionalForm();
+    this.setPatientForm();
+    this.isProfessional = true;
     this.userId = this.route.snapshot.params.id;
+    this.userType = this.route.snapshot.params.resource;
     if (this.userId) {
-      this.setFormValues(this.userId);
+      (this.userType === 'professionals') ?
+        this.isProfessional = true : this.isProfessional = false;
+      this.setUpdateForm(this.userId, this.userType);
     }
-    console.log(this.userForm);
+
   }
 
-
-  getInsuraceListFormGroup(user: User): FormGroup[] {
-    const formGroup: FormGroup[] = [];
-    user.insuranceList.forEach((element) => {
-      formGroup.push(
-        new FormGroup({
-          insuranceCompanyName: new FormControl(element.insuranceCompanyName),
-          insuranceType: new FormControl(element.insuranceType),
-          cardNumber: new FormControl(element.cardNumber)
-        })
-      );
+  setPersonalForm(): void {
+    this.personalForm = this.fb.group({
+      name: ['', Validators.required],
+      surname: '',
+      firstSurname: '',
+      secondSurname: '',
+      gender: '',
+      birthDate: '',
+      nif: '',
+      userType: 'Professional'
     });
+  }
+  setAddressForm(): void {
+    this.addressForm = this.fb.group({
+      streetName: '',
+      streetNumber: '',
+      doorNumber: '',
+      postalCode: '',
+      city: ''
+    });
+  }
+  setProfessionalForm(): void {
+    this.professionalForm = this.fb.group({
+      medicalBoardNumber: ['', Validators.required],
+      professionalType: 'Doctor'
+    });
+  }
+  setPatientForm(): void {
+    this.patientForm = this.fb.group({
+      nhc: ['', Validators.required],
+      insuranceList: this.fb.array([])
+    });
+  }
+
+  getInsuranceListFormGroup(patient: Patient): FormGroup[] {
+    const formGroup: FormGroup[] = [];
+    patient.insuranceList.forEach((insurance) => {
+      formGroup.push(this.fb.group({
+        insuranceCompanyName: insurance.insuranceCompanyName,
+        insuranceType: insurance.insuranceType,
+        cardNumber: insurance.cardNumber
+      }));
+    });
+    console.log(formGroup);
     return formGroup;
   }
 
-  setFormValues(id: number) {
-    this.userService.getUser(id).subscribe((user) => {
-      // console.log(this.getInsuraces(user));
-      // console.log('user insurances:', this.getInsuraces(user))
-      console.log('las listas son:  ', user.insuranceList);
-      this.userForm.get('personalData').patchValue({
+  setUpdateForm(id: string, resource: string): void {
+    this.userService.getUser(id, resource).subscribe((user) => {
+      this.personalForm.patchValue({
         name: user.name,
         firstSurname: user.firstSurname,
         secondSurname: user.secondSurname,
@@ -62,117 +102,70 @@ export class UserFormComponent implements OnInit {
         nif: user.nif,
         userType: user.userType
       });
-      this.userForm.get('address').patchValue({
+      this.addressForm.patchValue({
         streetName: user.address.streetName,
         streetNumber: user.address.streetNumber,
         doorNumber: user.address.doorNumber,
         postalCode: user.address.postalCode,
         city: user.address.city
       });
-      this.userForm.get('medicalData').patchValue({
-        nhc: user.nhc,
-        medicalBoardNumber: user.medicalBoardNumber,
-        professionalType: user.professionalType
-      })
-      console.log('las control son:  ', this.insuranceList);
-      console.log('las listas soon:  ', user.insuranceList);
-      const formArrayControl = new FormArray([]);
-      this.getInsuraceListFormGroup(user).forEach((element) => {
-        formArrayControl.push(element);
-      });
-      (this.userForm.get('medicalData') as FormGroup).setControl('insuranceList', formArrayControl)
-    });
-  }
-
-  createUserForm(): void {
-    this.userForm = new FormGroup({
-      personalData: new FormGroup({
-        name: new FormControl('', Validators.required),
-        firstSurname: new FormControl('', Validators.required),
-        secondSurname: new FormControl(''),
-        gender: new FormControl('Male'),
-        birthDate: new FormControl(''),
-        nif: new FormControl('', Validators.required),
-        userType: new FormControl('patient')
-      }),
-      address: new FormGroup({
-        street: new FormControl(''),
-        streetNumber: new FormControl(''),
-        doorNumber: new FormControl(''),
-        postalCode: new FormControl(''),
-        city: new FormControl('', Validators.required)
-      }),
-      medicalData: new FormGroup({
-        medicalBoardNumber: new FormControl('', Validators.required),
-        professionalType: new FormControl('Doctor'),
-        nhc: new FormControl('', Validators.required),
-        insuranceList: new FormArray([])
-      }),
+      if (resource === 'professionals') {
+        this.professionalForm.patchValue({
+          medicalBoardNumber: (user as Professional).medicalBoardNumber,
+          professionalType: (user as Professional).professionalType
+        });
+      } else {
+        this.patientForm.patchValue({
+          nhc: (user as Patient).nhc
+        });
+        const formArrayControl = this.fb.array([]);
+        console.log((user as Patient).insuranceList);
+        console.log((user as Patient).nhc);
+        this.getInsuranceListFormGroup(user as Patient).forEach((insurance) => {
+          formArrayControl.push(insurance);
+        });
+        this.patientForm.setControl('insuranceList', formArrayControl);
+      }
     });
   }
 
   onAddInsurance(): void {
-    const groupControl = new FormGroup({
-      insuranceCompanyName: new FormControl(''),
-      insuranceType: new FormControl(''),
-      cardNumber: new FormControl('')
+    const groupControl = this.fb.group({
+      insuranceCompanyName: '',
+      insuranceType: '',
+      cardNumber: ''
     });
-    console.log(groupControl);
-    this.insuranceList.push(groupControl);
+    this.getInsuranceList().push(groupControl);
   }
 
-  get insuranceList(): FormArray {
-    return this.userForm.get('medicalData').get('insuranceList') as FormArray;
+  getInsuranceList(): FormArray {
+    return this.patientForm.get('insuranceList') as FormArray;
   }
-
 
   buildUser(): void {
-    const userValue = this.userForm.value;
-    this.user = {
-      ...userValue.personalData,
-      ...userValue.medicalData,
-      address: userValue.address
-    };
-    console.log('objeto user: ', this.user);
-  }
-
-  setUserType(userType: string) {
-    (userType === 'professional') ?
-      this.isProfessional = true : this.isProfessional = false;
+    if (this.isProfessional) {
+      this.user = {
+        ...this.personalForm.value,
+        address: { ...this.addressForm.value },
+        ...this.professionalForm.value,
+      };
+    } else {
+      this.user = {
+        ...this.personalForm.value,
+        address: { ...this.addressForm.value },
+        ...this.patientForm.value,
+      };
+    }
   }
 
   onSubmit(): void {
-    // construimos el objeto con los datos a enviar
-
-    if (this.isProfessional) {
-      (this.userForm.get('medicalData') as FormGroup).removeControl('nhc');
-      (this.userForm.get('medicalData') as FormGroup).removeControl('insuranceList');
-    } else {
-      (this.userForm.get('medicalData') as FormGroup).removeControl('medicalBoardNumber');
-      (this.userForm.get('medicalData') as FormGroup).removeControl('professionalType');
-    }
     this.buildUser();
-    if (this.userId) {
-      this.userService.updateUser(this.userId, this.user as User).subscribe(() => {
-        this.router.navigate(['/users']);
-      });
-    } else {
-      this.userService.createUser(this.user as User).subscribe(() => {
-        this.router.navigate(['/users']);
-      })
-    }
-
+    // enviar segun caso
+    console.log(this.user);
   }
 
-
-  setCorrectValidators(): void {
-    if (this.isProfessional) {
-      this.userForm.get('medicalData').get('nhc').clearValidators();
-      this.userForm.get('medicalData').get('nhc').updateValueAndValidity();
-    } else {
-      this.userForm.get('medicalData').get('medicalBoardNumber').clearValidators();
-      this.userForm.get('medicalData').get('medicalBoardNumber').updateValueAndValidity();
-    }
+  setUserType(userType: string): void {
+    (userType === 'professional') ?
+      this.isProfessional = true : this.isProfessional = false;
   }
-
 }

@@ -37,12 +37,12 @@ export class UserService {
     return this.httpClient.delete<User>(`${this.API_BASE_URL}/${param}/${id}`);
   }
 
-
-
-
-  // createUser(user: User): Observable<User> {
-  //   return this.httpClient.post<User>(this.API_BASE_URL + '/users', user);
+  // createUser(user: User, param: string): Observable<User> {
+  //   return this.httpClient.post<User>(`${this.API_BASE_URL}/${param}`, user);
   // }
+
+
+
   // updateUser(id: number, user: User): Observable<User> {
   //   return this.httpClient.put<User>(this.API_BASE_URL + '/users/' + id, user);
   // }

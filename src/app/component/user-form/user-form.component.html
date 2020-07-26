@@ -1,15 +1,17 @@
 <div class="global-container">
   <div class="stepper-container">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <mat-horizontal-stepper linear #stepper>
-        <!-- Personal Data -->
-        <mat-step [stepControl]="userForm.get('personalData') " formGroupName="personalData">
+
+    <mat-horizontal-stepper linear #stepper>
+
+      <!-- Personal Data -->
+
+      <mat-step [stepControl]="personalForm">
+        <form [formGroup]="personalForm">
           <ng-template matStepLabel>Personal Data</ng-template>
           <div class="form-step">
             <div>
               <button mat-raised-button color="primary" matStepperNext type="button" class="next-button">Next</button>
             </div>
-
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
               <input matInput formControlName="name">
@@ -43,25 +45,26 @@
             <mat-form-field appearance="fill">
               <mat-label>User Type</mat-label>
               <mat-select matInput formControlName="userType" #userType (selectionChange)="setUserType(userType.value)">
-                <mat-option value="patient">Patient</mat-option>
-                <mat-option value="professional">Professional</mat-option>
+                <mat-option value="Patient">Patient</mat-option>
+                <mat-option value="Professional">Professional</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-        </mat-step>
+        </form>
+      </mat-step>
 
-        <!-- Address -->
-        <mat-step [stepControl]="userForm.get('address')" formGroupName="address">
+      <!-- Address -->
+      <mat-step [stepControl]="addressForm">
+        <form [formGroup]="addressForm">
           <ng-template matStepLabel>Address</ng-template>
           <div class="form-step">
             <div class="next-button">
               <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
-              <button mat-raised-button color="primary" matStepperNext type="button"
-                (click)=setCorrectValidators()>Next</button>
+              <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
             </div>
             <mat-form-field appearance="fill">
               <mat-label>Street</mat-label>
-              <input matInput formControlName="street">
+              <input matInput formControlName="streetName">
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Number</mat-label>
@@ -80,37 +83,28 @@
               <input matInput formControlName="city">
             </mat-form-field>
           </div>
+        </form>
+      </mat-step>
 
-        </mat-step>
-        <!-- Medical and Insurance Data -->
-        <mat-step [stepControl]="userForm.get('medicalData')" formGroupName="medicalData">
+      <!-- Patient Data -->
+      <mat-step *ngIf="!isProfessional" [stepControl]="patientForm">
+        <form [formGroup]="patientForm">
           <ng-template matStepLabel>Medical Data</ng-template>
           <div class="form-step">
             <div class="next-button">
               <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
               <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
             </div>
-            <mat-form-field appearance="fill" *ngIf="isProfessional">
-              <mat-label>Medical Board Number</mat-label>
-              <input matInput formControlName="medicalBoardNumber">
-            </mat-form-field>
-            <mat-form-field *ngIf="isProfessional" appearance="fill">
-              <mat-label>Professional Type</mat-label>
-              <mat-select matInput formControlName="professionalType">
-                <mat-option value='Doctor'>Doctor</mat-option>
-                <mat-option value='Nurse'>Nurse</mat-option>
-                <mat-option value='Administrative'>Administrative</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" *ngIf="!isProfessional">
+            <mat-form-field appearance="fill">
               <mat-label>NHC</mat-label>
               <input matInput formControlName="nhc">
             </mat-form-field>
 
-            <div class="add-insurance-list" formArrayName="insuranceList" *ngIf="!isProfessional">
+
+            <div class="add-insurance-list" formArrayName="insuranceList">
               <button mat-raised-button color="primary" type="button" (click)="onAddInsurance()">Add Insurance</button>
               <div class="insurances-container" [formGroupName]="i"
-                *ngFor="let insurance of insuranceList.controls; let i = index">
+                *ngFor="let insurance of getInsuranceList().controls; let i = index">
                 <mat-form-field appearance="fill">
                   <mat-label>Insurance Company Name</mat-label>
                   <input matInput formControlName="insuranceCompanyName">
@@ -127,18 +121,44 @@
               </div>
             </div>
 
+
+
           </div>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <div class="final-buttons">
-            <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
-            <button mat-raised-button color="primary" type="submit" *ngIf="!userId">Add User</button>
-            <button mat-raised-button color="primary" type="submit" *ngIf="userId">Update</button>
+        </form>
+      </mat-step>
+      <!-- Professional Data -->
+      <mat-step *ngIf="isProfessional" [stepControl]="professionalForm">
+        <form [formGroup]="professionalForm">
+          <ng-template matStepLabel>Medical Data</ng-template>
+          <div class="form-step">
+            <div class="next-button">
+              <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
+              <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
+            </div>
+            <mat-form-field appearance="fill">
+              <mat-label>Medical Board Number</mat-label>
+              <input matInput formControlName="medicalBoardNumber">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Professional Type</mat-label>
+              <mat-select matInput formControlName="professionalType">
+                <mat-option value='Doctor'>Doctor</mat-option>
+                <mat-option value='Nurse'>Nurse</mat-option>
+                <mat-option value='Administrative'>Administrative</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-        </mat-step>
-      </mat-horizontal-stepper>
-    </form>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="final-buttons">
+          <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
+          <button mat-raised-button color="primary" type="submit" *ngIf="!userId" (click)="onSubmit()">Add User</button>
+          <button mat-raised-button color="primary" type="submit" *ngIf="userId">Update</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
   </div>
   <div class="button-back">
     <button mat-raised-button color="warn" type="button" [routerLink]="['/users']">Back to home</button>
