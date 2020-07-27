@@ -87,7 +87,6 @@ export class UserFormComponent implements OnInit {
         cardNumber: insurance.cardNumber
       }));
     });
-    console.log(formGroup);
     return formGroup;
   }
 
@@ -119,8 +118,8 @@ export class UserFormComponent implements OnInit {
           nhc: (user as Patient).nhc
         });
         const formArrayControl = this.fb.array([]);
-        console.log((user as Patient).insuranceList);
-        console.log((user as Patient).nhc);
+        // console.log((user as Patient).insuranceList);
+        // console.log((user as Patient).nhc);
         this.getInsuranceListFormGroup(user as Patient).forEach((insurance) => {
           formArrayControl.push(insurance);
         });
@@ -160,12 +159,53 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(): void {
     this.buildUser();
+    let type: string;
+    (this.isProfessional) ? type = 'professionals' : type = 'patients';
+    console.log('tipo usuario: ', type);
+    if (this.userId) {
+      this.userService.updateUser(this.userId, type, this.user as User).subscribe(() => {
+        console.log(this.user);
+        this.router.navigate(['/users']);
+      });
+
+    } else {
+      this.userService.createUser(this.user as User, type).subscribe(() => {
+        this.router.navigate(['/users']);
+      });
+    }
     // enviar segun caso
     console.log(this.user);
   }
 
   setUserType(userType: string): void {
-    (userType === 'professional') ?
-      this.isProfessional = true : this.isProfessional = false;
+    if (userType === 'professional') {
+      this.isProfessional = true;
+    } else {
+      this.isProfessional = false;
+    }
   }
+
+
+  // onSubmit(): void {
+  //   //construimos el objeto con los datos a enviar
+
+  //   if (this.isProfessional) {
+  //     (<FormGroup>this.userForm.get('medicalData')).removeControl('nhc');
+  //     (<FormGroup>this.userForm.get('medicalData')).removeControl('insuranceList');
+  //   } else {
+  //     (<FormGroup>this.userForm.get('medicalData')).removeControl('medicalBoardNumber');
+  //     (<FormGroup>this.userForm.get('medicalData')).removeControl('professionalType');
+  //   }
+  //   this.buildUser();
+  //   if (this.userId) {
+  //     this.userService.updateUser(this.userId, <User>this.user).subscribe(() => {
+  //       this.router.navigate(['/users']);
+  //     });
+  //   } else {
+  //     this.userService.createUser(<User>this.user).subscribe(() => {
+  //       this.router.navigate(['/users']);
+  //     })
+  //   }
+
+  // }
 }

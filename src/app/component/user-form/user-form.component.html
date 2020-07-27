@@ -150,7 +150,7 @@
         <div class="final-buttons">
           <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
           <button mat-raised-button color="primary" type="submit" *ngIf="!userId" (click)="onSubmit()">Add User</button>
-          <button mat-raised-button color="primary" type="submit" *ngIf="userId">Update</button>
+          <button mat-raised-button color="primary" type="submit" *ngIf="userId" (click)="onSubmit()">Update</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

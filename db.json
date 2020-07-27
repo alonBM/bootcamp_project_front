@@ -1,70 +1,72 @@
 {
-  "patients": [{
-    "id": "1",
-    "name": "Ollie",
-    "firstSurname": "Hamilton",
-    "nhc": "237864783242",
-    "userType": "Patient",
-    "gender": "Male",
-    "secondSurname": null,
-    "birthdate": "1995-05-23T22:00:00.000Z",
-    "nif": "88888888Z",
-    "address": {
-      "city": "Barcelona",
-      "doorNumber": "",
-      "street": "",
-      "streetNumber": "",
-      "postalCode": "08027"
-    },
-    "insuranceList": [{
-        "cardNumber": "243254124243",
-        "insuranceCompanyName": null,
-        "insuranceType": "Health"
-      },
-      {
-        "cardNumber": "325423423142",
-        "insuranceCompanyName": "Insurance X",
-        "insuranceType": "Family"
-      }
-    ]
-  }],
-  "professionals": [{
-      "id": "2",
-      "name": "Alex",
-      "firstSurname": "Hayes",
-      "userType": "Professional",
-      "gender": "Male",
-      "secondSurname": null,
-      "birthdate": "1995-05-23T22:00:00.000Z",
-      "nif": "88888888Z",
-      "professionalType": "Doctor",
-      "medicalBoardNumber": "2342427984",
+  "patients": [
+    {
+      "name": "PACIENTEUNO",
+      "surname": "",
+      "firstSurname": "",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "asdasd",
+      "userType": "Patient",
       "address": {
-        "city": "Barcelona",
-        "doorNumber": "",
-        "street": "",
+        "streetName": "",
         "streetNumber": "",
-        "postalCode": "69234"
-      }
+        "doorNumber": "",
+        "postalCode": "",
+        "city": "asdasd"
+      },
+      "nhc": "4545",
+      "insuranceList": [
+        {
+          "insuranceCompanyName": "company1",
+          "insuranceType": "hola",
+          "cardNumber": "34234"
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "professionals": [
+    {
+      "name": "Abertea",
+      "surname": "",
+      "firstSurname": "",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "",
+      "userType": "Professional",
+      "address": {
+        "streetName": "",
+        "streetNumber": "",
+        "doorNumber": "",
+        "postalCode": "",
+        "city": ""
+      },
+      "medicalBoardNumber": "asdasd",
+      "professionalType": "Doctor",
+      "id": 1
     },
     {
-      "id": "3",
-      "name": "Alex 2",
-      "firstSurname": "Hayes",
+      "name": "hola",
+      "surname": "",
+      "firstSurname": "",
+      "secondSurname": "",
+      "gender": "",
+      "birthDate": "",
+      "nif": "",
       "userType": "Professional",
-      "gender": "Male",
-      "secondSurname": null,
-      "birthdate": "1995-05-23T22:00:00.000Z",
-      "nif": "88888888Z",
-      "professionalType": "Doctor",
-      "medicalBoardNumber": "2342427984",
       "address": {
-        "city": "Barcelona",
-        "doorNumber": "",
-        "street": "",
+        "streetName": "asdasdas",
         "streetNumber": "",
-        "postalCode": "69234"
-      }
+        "doorNumber": "",
+        "postalCode": "",
+        "city": ""
+      },
+      "medicalBoardNumber": "asdasd",
+      "professionalType": "Doctor",
+      "id": 2
     }
   ]
 }

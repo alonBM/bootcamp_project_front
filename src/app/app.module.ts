@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { DialogComponent } from './component/dialog/dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DialogComponent } from './component/dialog/dialog.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatPaginatorModule,
     MatListModule,
     MatInputModule,
     MatCardModule,

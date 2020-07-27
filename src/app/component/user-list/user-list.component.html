@@ -2,15 +2,16 @@
   <div class="action-buttons">
     <button mat-raised-button color="primary" [routerLink]="['/users','new']">New User</button>
     <button mat-raised-button color="warn" (click)="deleteAllDoctors()">Delete Doctors</button>
-
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="" #input #usersFilter>
+    </mat-form-field>
   </div>
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="users">
       <!-- Name Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID</th>
-        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-      </ng-container>
       <ng-container matColumnDef="nhc">
         <th mat-header-cell *matHeaderCellDef> NHC </th>
         <td mat-cell *matCellDef="let user"> {{user.nhc}} </td>
@@ -34,16 +35,21 @@
       <ng-container matColumnDef="icons">
         <th mat-header-cell *matHeaderCellDef> Icons</th>
         <td mat-cell *matCellDef="let user">
-          <mat-icon class="detail-icon" 
-          routerLink="/users/{{user.nhc ? 'patients' : 'professionals'}}/{{ user.id }}">
+          <mat-icon class="detail-icon" routerLink="/users/{{user.nhc ? 'patients' : 'professionals'}}/{{ user._id }}">
             search</mat-icon>
           <mat-icon class="edit-icon"
-            routerLink="/users/{{user.nhc ? 'patients' : 'professionals'}}/edit/{{ user.id }}">edit</mat-icon>
+            routerLink="/users/{{user.nhc ? 'patients' : 'professionals'}}/edit/{{ user._id }}">edit</mat-icon>
           <mat-icon class="delete-icon" (click)="onOpenDeleteDialog(user)">delete</mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6" *ngIf="users.data.length && usersFilter.value">
+          No users matching the filter "{{ usersFilter.value }}".
+        </td>
+      </tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>
