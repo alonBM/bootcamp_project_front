@@ -99,8 +99,6 @@
               <mat-label>NHC</mat-label>
               <input matInput formControlName="nhc">
             </mat-form-field>
-
-
             <div class="add-insurance-list" formArrayName="insuranceList">
               <button mat-raised-button color="primary" type="button" (click)="onAddInsurance()">Add Insurance</button>
               <div class="insurances-container" [formGroupName]="i"
@@ -120,9 +118,6 @@
                 <!-- <button mat-button type="button" (click)="removeInsurance(i)">Borrar aseguradora</button> -->
               </div>
             </div>
-
-
-
           </div>
         </form>
       </mat-step>
