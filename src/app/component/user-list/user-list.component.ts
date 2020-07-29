@@ -33,13 +33,11 @@ export class UserListComponent implements OnInit {
       this.users = new MatTableDataSource(data[0].concat(data[1]));
       this.users.paginator = this.paginator;
       this.users.sort = this.sort;
+    },
+    (error: Error) => {
+      console.error(error);
     });
   }
-
-  // onDeleteUser(id: number): void {
-  //   this.userService.deleteUser(id).subscribe(console.log);
-  //   this.userService.getAllUsers();
-  // }
 
   onOpenDeleteDialog(user: User): void {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -70,15 +68,18 @@ export class UserListComponent implements OnInit {
     const doctors: Professional[] = (professionals).filter(
       (professional) => professional.userType === 'Professional'
     );
-
     const deleteDoctorsPetitions: Observable<User>[] = [];
     for (const doctor of doctors) {
       deleteDoctorsPetitions.push(this.userService.deleteUser(doctor._id, 'professionals'));
     }
     forkJoin(deleteDoctorsPetitions).subscribe(() => {
       this.getAllUsers();
+    },
+    (error: Error) => {
+      console.error(error);
     });
   }
+
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.users.filter = filterValue.trim().toLowerCase();

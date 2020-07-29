@@ -45,11 +45,14 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="6" *ngIf="users.data.length && usersFilter.value">
-          No users matching the filter "{{ usersFilter.value }}".
+        <td class="mat-cell" colspan="6">
+          <span *ngIf="users.data.length && usersFilter.value"> No users matching the filter
+            "{{ usersFilter.value }}"</span>
+          <span *ngIf="!users.data.length"> No hay usuarios</span>
         </td>
       </tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]=" [5, 10, 25, 100]">
+    </mat-paginator>
   </div>
 </div>
