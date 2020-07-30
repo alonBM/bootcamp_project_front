@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { forkJoin, Observable } from 'rxjs';
 import { Patient } from '../models/patient.model';
 import { Professional } from '../models/professional.model';
+import { UserAccount } from '../models/user-account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,7 @@ export class UserService {
   updateUser(id: string, param: string, user: User): Observable<User> {
     return this.httpClient.put<User>(`${this.API_BASE_URL}/${param}/${id}`, user);
   }
+
+
 
 }

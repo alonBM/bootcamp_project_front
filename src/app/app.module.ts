@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
 import { Error404Component } from './component/error404/error404.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,7 +25,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { DialogComponent } from './component/dialog/dialog.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HomeComponent } from './component/home/home.component';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -35,10 +39,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     UserDetailComponent,
     Error404Component,
     UserFormComponent,
-    DialogComponent
+    DialogComponent,
+    HomeComponent
   ],
   imports: [
     MatSliderModule,
+    MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
@@ -60,7 +66,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
