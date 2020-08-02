@@ -1,15 +1,8 @@
 <mat-card>
-  <mat-card-title [routerLink]="['/users']">
+  <div class="left-div">
     <img src="../../../assets/img/logo.png" alt="logo" />
-    <p> Hospital Information System</p>
-
-    <div *ngIf="isSignedIn()" (click)="logout()">
-      <button mat-fab>
-        <mat-icon>delete </mat-icon>
-      </button>
-    </div>
-  </mat-card-title>
-
-
-
+  </div>
+  <div class="right-div" *ngIf="isSignedIn()" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </div>
 </mat-card>

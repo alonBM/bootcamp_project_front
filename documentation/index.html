@@ -1,0 +1,123 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bootcamp-project documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">bootcamp-project documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="bootcamp-project">Bootcamp Project</h1>
+<p>Demo app is available at:</p>
+<p>This project was built with Angular 10 and Angular Material. Is an hospital information system application.</p>
+<p>The backend, built with NestJS and MongoDB can be found at my other repo:</p>
+<p>The project documentation is located at:</p>
+<h2 id="instructions-to-run-locally-with-your-own-mongodb">Instructions to run locally with your own MongoDB</h2>
+<ol>
+<li>Install Node and Angular CLI.</li>
+<li>Create a MongoDB Atlas account and a database.</li>
+<li>Clone or download the frontend repo and run <code>npm install</code>.</li>
+<li>Clone or download the backend repo and run <code>npm install</code></li>
+<li>In the frontend&#39;s <code>index.html</code>, change <code>&lt;base href=&quot;/HIS-app/&quot; /&gt;</code> to <code>&lt;base href=&quot;/&quot; /&gt;</code></li>
+<li>In the backend&#39;s root, create an <code>.env</code> file and add your own MongoDB credentials.</li>
+<li>In the frontend, change the services&#39; <code>BASE_API_URL</code> variable to <code>http://localhost</code>.</li>
+<li>Run <code>npm start</code> on both terminals. Now the app will be running at <a href="http://localhost:4200/">http://localhost:4200/</a></li>
+</ol>
+<h2 id="installation">Installation</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2 id="running-the-app">Running the app</h2>
+<div><pre class="line-numbers"><code class="language-bash"># development
+$ ng serve
+
+# build
+$ ng build</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

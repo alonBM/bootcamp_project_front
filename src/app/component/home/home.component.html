@@ -33,15 +33,15 @@
               formControlName="password"
             />
             <mat-error>
-              <span *ngIf="loginForm.get('email').touched"
-                >Please add a valid email.</span
+              <span *ngIf="loginForm.get('password').touched"
+                >Please add a valid password.</span
               >
             </mat-error>
           </mat-form-field>
         </p>
         <div class="buttons">
           <button type="submit" mat-raised-button color="primary">
-            <span *ngIf="isLogin">Accept</span
+            <span *ngIf="isLogin">Sing in</span
             ><span *ngIf="!isLogin">Confirm</span>
           </button>
           <button

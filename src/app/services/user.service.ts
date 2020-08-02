@@ -7,12 +7,12 @@ import { Professional } from '../models/professional.model';
 import { UserAccount } from '../models/user-account.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
-  private API_BASE_URL = 'https://his-app-alonso.herokuapp.com';
+  private API_BASE_URL = 'http://localhost';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<User[][]> {
     const users: Observable<User[]>[] = [];
@@ -26,9 +26,8 @@ export class UserService {
   }
 
   getAllProfessionals(): Observable<Professional[]> {
-    return this.httpClient.get<Professional[]>(
-      this.API_BASE_URL + '/professionals/'
-    );
+    return this.httpClient.get<Professional[]>(this.API_BASE_URL + '/professionals/');
+
   }
 
   getUser(id: string, param: string): Observable<User> {
@@ -44,9 +43,9 @@ export class UserService {
   }
 
   updateUser(id: string, param: string, user: User): Observable<User> {
-    return this.httpClient.put<User>(
-      `${this.API_BASE_URL}/${param}/${id}`,
-      user
-    );
+    return this.httpClient.put<User>(`${this.API_BASE_URL}/${param}/${id}`, user);
   }
+
+
+
 }

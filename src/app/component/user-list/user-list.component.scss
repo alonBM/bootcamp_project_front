@@ -52,7 +52,7 @@ mat-icon {
 .action-buttons {
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 100%;
   margin-top: 1em;
   margin-bottom: 1em;
   & button {
@@ -76,4 +76,25 @@ mat-icon {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+
+mat-cell {
+  display: flex;
+  justify-content: center;
+}
+
+th,
+td {
+  text-align: center !important;
+}
+
+@media (max-width: 425px) {
+  .hide {
+    display: none !important;
+  }
 }

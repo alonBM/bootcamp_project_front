@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private API_BASE_URL = 'https://his-app-alonso.herokuapp.com';
+  private API_BASE_URL = 'http://localhost';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,7 +17,6 @@ export class AuthService {
       userAccount
     );
   }
-
 
   isSignedIn(): boolean {
     if (localStorage.getItem('token')) {
