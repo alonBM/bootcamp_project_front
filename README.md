@@ -1,12 +1,10 @@
 # Bootcamp Project
 
-Demo app is available at:
+Demo app is available at: https://alonbm.github.io/bootcamp_project_front/home
 
 This project was built with Angular 10 and Angular Material. Is an hospital information system application.
 
-The backend, built with NestJS and MongoDB can be found at my other repo:
-
-The project documentation is located at:
+The backend, built with NestJS and MongoDB can be found at my other repo: https://github.com/alonBM/bootcamp_project_back
 
 ## Instructions to run locally with your own MongoDB
 
