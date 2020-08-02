@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private API_BASE_URL = 'http://his-app-alonso.herokuapp.com';
+  private API_BASE_URL = 'https://his-app-alonso.herokuapp.com';
 
   constructor(private httpClient: HttpClient) {}
 

@@ -10,7 +10,7 @@ import { UserAccount } from '../models/user-account.model';
   providedIn: 'root',
 })
 export class UserService {
-  private API_BASE_URL = 'http://his-app-alonso.herokuapp.com';
+  private API_BASE_URL = 'https://his-app-alonso.herokuapp.com';
 
   constructor(private httpClient: HttpClient) {}
 
