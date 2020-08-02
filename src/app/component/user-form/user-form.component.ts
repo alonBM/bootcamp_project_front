@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { User, } from 'src/app/models/user.model';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Professional } from 'src/app/models/professional.model';
 import { Patient } from 'src/app/models/patient.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
   ALPHANUMERIC_TRIMMED_REGEX = '^[a-zÀ-úA-Z0-9_]+( [a-zÀ-úA-Z0-9_]+)*$';
@@ -25,10 +26,12 @@ export class UserFormComponent implements OnInit {
   maxDate = new Date();
 
   constructor(
+    private snackBar: MatSnackBar,
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.setPersonalForm();
@@ -39,22 +42,34 @@ export class UserFormComponent implements OnInit {
     this.userId = this.route.snapshot.params.id;
     this.userType = this.route.snapshot.params.resource;
     if (this.userId) {
-      (this.userType === 'professionals') ?
-        this.isProfessional = true : this.isProfessional = false;
+      this.userType === 'professionals'
+        ? (this.isProfessional = true)
+        : (this.isProfessional = false);
       this.setUpdateForm(this.userId, this.userType);
       this.personalForm.get('userType').disable();
     }
   }
 
+  openSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
   setPersonalForm(): void {
     this.personalForm = this.fb.group({
       name: ['', Validators.required],
-      firstSurname: ['', [Validators.required, Validators.pattern(this.ALPHA_TRIMMED_REGEX)]],
+      firstSurname: [
+        '',
+        [Validators.required, Validators.pattern(this.ALPHA_TRIMMED_REGEX)],
+      ],
       secondSurname: ['', Validators.pattern(this.ALPHA_TRIMMED_REGEX)],
       gender: 'Male',
       birthDate: '',
       nif: ['', Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)],
-      userType: 'Professional'
+      userType: 'Professional',
     });
   }
   setAddressForm(): void {
@@ -63,80 +78,96 @@ export class UserFormComponent implements OnInit {
       streetNumber: ['', Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)],
       doorNumber: ['', Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)],
       postalCode: ['', Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)],
-      city: ['', Validators.pattern(this.ALPHA_TRIMMED_REGEX)]
+      city: ['', Validators.pattern(this.ALPHA_TRIMMED_REGEX)],
     });
   }
   setProfessionalForm(): void {
     this.professionalForm = this.fb.group({
-      medicalBoardNumber: ['', [Validators.required, Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)]],
-      professionalType: 'Doctor'
+      medicalBoardNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX),
+        ],
+      ],
+      professionalType: 'Doctor',
     });
   }
   setPatientForm(): void {
     this.patientForm = this.fb.group({
-      nhc: ['', [Validators.required, Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX)]],
-      insuranceList: this.fb.array([])
+      nhc: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.ALPHANUMERIC_TRIMMED_REGEX),
+        ],
+      ],
+      insuranceList: this.fb.array([]),
     });
   }
 
   getInsuranceListFormGroup(patient: Patient): FormGroup[] {
     const formGroup: FormGroup[] = [];
     patient.insuranceList.forEach((insurance) => {
-      formGroup.push(this.fb.group({
-        insuranceCompanyName: insurance.insuranceCompanyName,
-        insuranceType: insurance.insuranceType,
-        cardNumber: insurance.cardNumber
-      }));
+      formGroup.push(
+        this.fb.group({
+          insuranceCompanyName: insurance.insuranceCompanyName,
+          insuranceType: insurance.insuranceType,
+          cardNumber: insurance.cardNumber,
+        })
+      );
     });
     return formGroup;
   }
 
   setUpdateForm(id: string, resource: string): void {
-    this.userService.getUser(id, resource).subscribe((user) => {
-      this.personalForm.patchValue({
-        name: user.name,
-        firstSurname: user.firstSurname,
-        secondSurname: user.secondSurname,
-        gender: user.gender,
-        birthDate: user.birthDate,
-        nif: user.nif,
-        userType: user.userType
-      });
-      this.addressForm.patchValue({
-        streetName: user.address.streetName,
-        streetNumber: user.address.streetNumber,
-        doorNumber: user.address.doorNumber,
-        postalCode: user.address.postalCode,
-        city: user.address.city
-      });
-      if (resource === 'professionals') {
-        this.professionalForm.patchValue({
-          medicalBoardNumber: (user as Professional).medicalBoardNumber,
-          professionalType: (user as Professional).professionalType
+    this.userService.getUser(id, resource).subscribe(
+      (user) => {
+        this.personalForm.patchValue({
+          name: user.name,
+          firstSurname: user.firstSurname,
+          secondSurname: user.secondSurname,
+          gender: user.gender,
+          birthDate: user.birthDate,
+          nif: user.nif,
+          userType: user.userType,
         });
-      } else {
-        this.patientForm.patchValue({
-          nhc: (user as Patient).nhc
+        this.addressForm.patchValue({
+          streetName: user.address.streetName,
+          streetNumber: user.address.streetNumber,
+          doorNumber: user.address.doorNumber,
+          postalCode: user.address.postalCode,
+          city: user.address.city,
         });
-        const formArrayControl = this.fb.array([]);
-        // console.log((user as Patient).insuranceList);
-        // console.log((user as Patient).nhc);
-        this.getInsuranceListFormGroup(user as Patient).forEach((insurance) => {
-          formArrayControl.push(insurance);
-        });
-        this.patientForm.setControl('insuranceList', formArrayControl);
-      }
-    },
+        if (resource === 'professionals') {
+          this.professionalForm.patchValue({
+            medicalBoardNumber: (user as Professional).medicalBoardNumber,
+            professionalType: (user as Professional).professionalType,
+          });
+        } else {
+          this.patientForm.patchValue({
+            nhc: (user as Patient).nhc,
+          });
+          const formArrayControl = this.fb.array([]);
+          this.getInsuranceListFormGroup(user as Patient).forEach(
+            (insurance) => {
+              formArrayControl.push(insurance);
+            }
+          );
+          this.patientForm.setControl('insuranceList', formArrayControl);
+        }
+      },
       (error: Error) => {
         console.error(error);
-      });
+      }
+    );
   }
 
   onAddInsurance(): void {
     const groupControl = this.fb.group({
       insuranceCompanyName: '',
       insuranceType: '',
-      cardNumber: ''
+      cardNumber: '',
     });
     this.getInsuranceList().push(groupControl);
   }
@@ -164,22 +195,29 @@ export class UserFormComponent implements OnInit {
   onSubmit(): void {
     this.buildUser();
     let type: string;
-    (this.isProfessional) ? type = 'professionals' : type = 'patients';
-    console.log('tipo usuario: ', type);
+    this.isProfessional ? (type = 'professionals') : (type = 'patients');
     if (this.userId) {
-      this.userService.updateUser(this.userId, type, this.user as User).subscribe(() => {
-        this.router.navigate(['/users']);
-      },
-        (error: Error) => {
-          console.error(error);
-        });
+      this.userService
+        .updateUser(this.userId, type, this.user as User)
+        .subscribe(
+          () => {
+            this.openSnackbar('User has been updated');
+            this.router.navigate(['/users']);
+          },
+          (error: Error) => {
+            console.error(error);
+          }
+        );
     } else {
-      this.userService.createUser(this.user as User, type).subscribe(() => {
-        this.router.navigate(['/users']);
-      },
+      this.userService.createUser(this.user as User, type).subscribe(
+        () => {
+          this.openSnackbar('User has been created');
+          this.router.navigate(['/users']);
+        },
         (error: Error) => {
           console.error(error);
-        });
+        }
+      );
     }
   }
 
@@ -190,5 +228,4 @@ export class UserFormComponent implements OnInit {
       this.isProfessional = false;
     }
   }
-
 }

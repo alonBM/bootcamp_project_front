@@ -8,51 +8,62 @@ import { Professional } from 'src/app/models/professional.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss'],
 })
-
 export class UserListComponent implements OnInit {
-  displayedColumns = ['nhc', 'medicalBoardNumber', 'name', 'firstSurname', 'icons'];
+  displayedColumns = [
+    'nhc',
+    'medicalBoardNumber',
+    'name',
+    'firstSurname',
+    'icons',
+  ];
   users: MatTableDataSource<User>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private userService: UserService, public dialog: MatDialog) {
-  }
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
   }
 
   getAllUsers(): void {
-    this.userService.getAllUsers().subscribe((data: User[][]) => {
-      this.users = new MatTableDataSource(data[0].concat(data[1]));
-      this.users.paginator = this.paginator;
-      this.users.sort = this.sort;
-    },
-    (error: Error) => {
-      console.error(error);
-    });
+    this.userService.getAllUsers().subscribe(
+      (data: User[][]) => {
+        this.users = new MatTableDataSource(data[0].concat(data[1]));
+        this.users.paginator = this.paginator;
+        this.users.sort = this.sort;
+      },
+      (error: Error) => {
+        console.error(error);
+      }
+    );
   }
 
   onOpenDeleteDialog(user: User): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '200px',
       data: {
-        title: 'Delete user ' + user.id,
-        body: 'Are you sure ?',
+        title: 'Confirm delete',
+        body: 'Are you sure do you want to delete this user?',
       },
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         let type: string;
-        (user.userType === 'Professional') ?
-          type = 'professionals' : type = 'patients';
-        console.log(type);
+        user.userType === 'Professional'
+          ? (type = 'professionals')
+          : (type = 'patients');
         this.userService.deleteUser(user._id, type).subscribe(() => {
           this.getAllUsers();
         });
@@ -65,19 +76,24 @@ export class UserListComponent implements OnInit {
       (user) => user.userType === 'Professional'
     ) as Professional[];
 
-    const doctors: Professional[] = (professionals).filter(
+    const doctors: Professional[] = professionals.filter(
       (professional) => professional.userType === 'Professional'
     );
     const deleteDoctorsPetitions: Observable<User>[] = [];
     for (const doctor of doctors) {
-      deleteDoctorsPetitions.push(this.userService.deleteUser(doctor._id, 'professionals'));
+      deleteDoctorsPetitions.push(
+        this.userService.deleteUser(doctor._id, 'professionals')
+      );
     }
-    forkJoin(deleteDoctorsPetitions).subscribe(() => {
-      this.getAllUsers();
-    },
-    (error: Error) => {
-      console.error(error);
-    });
+    forkJoin(deleteDoctorsPetitions).subscribe(
+      () => {
+        this.getAllUsers();
+        this.openSnackbar('Doctors has been deleted');
+      },
+      (error: Error) => {
+        console.error(error);
+      }
+    );
   }
 
   applyFilter(event: Event): void {
@@ -88,4 +104,11 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  openSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 }

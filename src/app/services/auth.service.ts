@@ -4,15 +4,18 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private API_BASE_URL = 'http://localhost:3000';
+  private API_BASE_URL = 'https://his-app-alonso.herokuapp.com';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   signIn(userAccount: UserAccount): Observable<UserAccount> {
-    return this.httpClient.post<UserAccount>(`${this.API_BASE_URL}/auth`, userAccount);
+    return this.httpClient.post<UserAccount>(
+      `${this.API_BASE_URL}/auth`,
+      userAccount
+    );
   }
 
   isSignedIn(): boolean {
@@ -23,7 +26,10 @@ export class AuthService {
   }
 
   signUp(userAccount: UserAccount): Observable<UserAccount> {
-    return this.httpClient.post<UserAccount>(`${this.API_BASE_URL}/register`, userAccount);
+    return this.httpClient.post<UserAccount>(
+      `${this.API_BASE_URL}/register`,
+      userAccount
+    );
   }
 
   getToken(): string {

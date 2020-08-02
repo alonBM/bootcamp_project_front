@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   openSnackbar(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
@@ -35,33 +35,56 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/users']);
     }
     this.isLogin = true;
+    this.setForm();
+
+  }
+
+  setForm(): void {
     this.loginForm = this.fb.group({
-      email: '',
+      email: ['', [Validators.email, Validators.required]],
       password: ''
     });
   }
 
-
-  // TIPAR TIPAR TIPAR TIPAR
   onSubmit(): void {
-    if (this.isLogin) {
-      console.log(this.isLogin);
-      this.authService.signIn(this.loginForm.value).subscribe((data: any) => {
-        console.log(data.token);
-        localStorage.setItem('token', data.token);
-        this.openSnackbar('logged in');
-        this.router.navigate(['/users']);
-
-      });
-      console.log(this.loginForm.value);
+    if (this.loginForm.status === 'VALID') {
+      if (this.isLogin) {
+        this.authService.signIn(this.loginForm.value).subscribe((data: any) => {
+          localStorage.setItem('token', data.token);
+          this.openSnackbar('logged in');
+          this.router.navigate(['/users']);
+        },
+          (error) => {
+            this.openSnackbar('An error has occurred');
+            console.error('An error has occurred', error);
+            this.setForm();
+            this.router.navigate(['/home']);
+          });
+      } else {
+        this.authService.signUp(this.loginForm.value).subscribe(() => {
+          this.openSnackbar('Your account has been successfully created');
+          this.isLogin = true;
+          this.setForm();
+          this.router.navigate(['/home']);
+        },
+          (error) => {
+            this.openSnackbar('An error has occurred');
+            console.error('An error has occurred', error);
+          });
+      }
     } else {
-      this.authService.signUp(this.loginForm.value).subscribe(() => {
-        this.router.navigate(['/home']);
-      });
+      this.openSnackbar('Please introduce something valid');
     }
+
   }
   toRegister(): void {
+    this.setForm();
     this.isLogin = false;
+  }
+
+  toLogin(): void {
+    this.isLogin = true;
+    this.setForm();
   }
 
 }

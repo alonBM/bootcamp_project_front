@@ -1,19 +1,27 @@
 .container {
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .example-container {
   height: 70vh;
-  width: 80vw;
+  width: 100%;
   overflow: auto;
 }
 
 table {
   width: 100%;
+}
+
+.filter {
+  width: 100%;
+  & mat-form-field {
+    width: 100%;
+  }
 }
 
 td.mat-column-star {
@@ -38,12 +46,18 @@ mat-icon {
   cursor: pointer;
 }
 
+.action-buttons-wrapper {
+  width: 100%;
+}
 .action-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 80vw;
+  flex-direction: row;
+  width: 50%;
   margin-top: 1em;
   margin-bottom: 1em;
+  & button {
+    margin-right: 1em;
+  }
 }
 
 .detail-icon {
@@ -56,4 +70,10 @@ mat-icon {
 
 .delete-icon {
   color: rgb(192, 56, 56);
+}
+
+.my-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.component-wrapper {
+  height: 90vh;
+  width: 100vw;
+  display: grid;
+}
+
+mat-card {
+  align-self: center;
+  justify-self: center;
+  height: 45vh;
+  width: 80vw;
+  padding: 0;
+  padding: 5%;
+}
+
+mat-card-title {
+  margin-top: 5%;
+  padding-bottom: 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.buttons {
+  margin-top: 7%;
+  display: flex;
+  justify-content: space-around;
+}
+
+@media only screen and (min-width: 600px) {
+  mat-card {
+    width: 30vw;
+  }
+}
